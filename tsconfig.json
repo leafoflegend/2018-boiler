@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "js/",
     "sourceMap": true,
     "module": "esnext",
     "target": "esnext",

@@ -2,6 +2,6 @@ import React from 'react';
 
 export default async () => (
 	<div>
-		{ 'hi' }
+		{ 'hi there space cowboy!' }
 	</div>
 )

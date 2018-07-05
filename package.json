@@ -9,7 +9,9 @@
     "prepublishOnly": "make pre-publish",
     "lint": "make lint",
     "test": "make test",
-    "build:docs": "make build-docs"
+    "build:docs": "make build-docs",
+    "build:fe": "make build-fe",
+    "serve": "make serve"
   },
   "author": "Eliot Szwajkowski <eliotpszw@gmail.com>",
   "contributors": [
@@ -29,9 +31,13 @@
   },
   "dependencies": {
     "@material-ui/core": "^1.3.1",
+    "connected-react-router": "^4.3.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "redux": "^4.0.0"
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.51",
@@ -42,12 +48,14 @@
     "@babel/preset-stage-2": "^7.0.0-beta.51",
     "@types/react": "16.4.1",
     "@types/react-dom": "16.0.6",
+    "@types/webpack-env": "^1.13.6",
     "awesome-typescript-loader": "^5.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.5",
     "babel-jest": "^23.2.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
+    "babel-preset-minify": "^0.4.3",
     "chalk": "^2.4.1",
     "circular-dependency-plugin": "^5.0.2",
     "compression-webpack-plugin": "^1.1.11",
@@ -58,11 +66,15 @@
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-react": "^7.10.0",
     "express": "^4.16.3",
+    "express-static-gzip": "^0.3.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
+    "hard-source-webpack-plugin": "^0.10.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.3.0",
+    "name-all-modules-plugin": "^1.0.1",
     "node-notifier": "^5.2.1",
+    "offline-plugin": "^5.0.5",
     "react-hot-loader": "^4.3.3",
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
@@ -73,11 +85,15 @@
     "tslint": "^5.10.0",
     "typedoc": "^0.11.1",
     "typescript": "^2.9.2",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^1.0.1",
     "webpack": "^4.14.0",
     "webpack-build-notifier": "^0.1.28",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-middleware": "^3.1.3",
-    "webpack-hot-middleware": "^2.22.2"
+    "webpack-hot-middleware": "^2.22.2",
+    "webpack-manifest-plugin": "^2.0.3",
+    "webpack-pwa-manifest": "^3.6.2"
   },
   "resolutions": {
     "@types/react": "16.4.1",

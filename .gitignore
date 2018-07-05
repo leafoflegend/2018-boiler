@@ -4,3 +4,6 @@ node_modules/
 .awcache/
 **/yarn-error*
 coverage/
+js/
+dist/
+build/
