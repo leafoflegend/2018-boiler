@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "indent": [true, "tabs", 2],
+    "ter-indent": [true, "tab"],
+    "max-line-length": [false],
+    "radix": false,
+    "no-increment-decrement": false,
+    "space-before-function-paren": true,
+    "import-name": false,
+    "variable-name": false
+  }
+}
