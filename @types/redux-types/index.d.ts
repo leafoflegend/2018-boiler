@@ -1,6 +1,11 @@
 export interface State {
 	APP_BAR: {
 		title: string;
+		userMenu: {
+			open: boolean;
+			anchorEl: null | HTMLElement;
+			menuItems: { title: string }[];
+		},
 		menu: {
 			open: boolean;
 		};
@@ -20,6 +25,7 @@ export interface State {
 
 export const enum Constants {
 	APP_BAR_TOGGLE_MENU = '@@appBar/TOGGLE_MENU',
+	APP_BAR_TOGGLE_USER_MENU = '@@appBar/TOGGLE_USER_MENU',
 }
 
 export type Action = { type: Constants, data?: any };

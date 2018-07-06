@@ -13,7 +13,20 @@ const appBarReducer: Reducer = (state: State, { type, data }: Action): State => 
 			APP_BAR: {
 				...state.APP_BAR,
 				menu: {
+					...state.APP_BAR.menu,
 					open: data,
+				},
+			},
+		};
+	case Constants.APP_BAR_TOGGLE_USER_MENU:
+		return {
+			...state,
+			APP_BAR: {
+				...state.APP_BAR,
+				userMenu: {
+					...state.APP_BAR.userMenu,
+					open: data.open,
+					anchorEl: data.node,
 				},
 			},
 		};
