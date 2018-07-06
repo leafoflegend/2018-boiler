@@ -4,6 +4,7 @@
     "browser": true,
     "jest": true
   },
+  "extends": "eslint-config-airbnb",
   "plugins": [
     "jest"
   ],
@@ -33,5 +34,6 @@
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
+    "import/no-extraneous-dependencies": 1
   }
 }

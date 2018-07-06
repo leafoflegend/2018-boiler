@@ -18,6 +18,9 @@ const {
 	applicationDescription,
 	applicationBackgroundColor,
 	applicationThemeColor,
+	applicationThemeSecondaryColor,
+	applicationThemeType,
+	applicationThemeFonts,
 } = require('../boilerconfig');
 
 module.exports = () => {
@@ -42,6 +45,7 @@ module.exports = () => {
 		alwaysWriteToDisk: true,
 		production: false,
 		title: applicationName,
+		bgColor: applicationBackgroundColor,
 		filename: 'index.html',
 		template: '!!ejs-loader!./configuration/template.ejs',
 		chunksSortMode: 'none',
@@ -81,7 +85,12 @@ module.exports = () => {
 	let plugins = [
 		new webpack.DefinePlugin({
 			'process.env': {
-				APPLICATION_NAME: applicationName,
+				APPLICATION_NAME: `"${applicationName}"`,
+				APPLICATION_BG_COLOR: `"${applicationBackgroundColor}"`,
+				APPLICATION_THEME_COLOR: `"${applicationThemeColor}"`,
+				APPLICATION_THEME_SECONDARY_COLOR: `"${applicationThemeSecondaryColor}"`,
+				APPLICATION_THEME_TYPE: `"${applicationThemeType}"`,
+				APPLICATION_THEME_FONTS: `"${applicationThemeFonts}"`,
 			},
 		}),
 		new HtmlWebpackPlugin({
@@ -176,7 +185,7 @@ module.exports = () => {
 						enforce: true,
 					},
 				},
-			}
+			},
 		},
 		devtool: 'source-map',
 		context: isDevelopment
@@ -184,7 +193,7 @@ module.exports = () => {
 			: path.join(process.cwd(), './js'),
 		plugins,
 		resolve: {
-			extensions: ['.ts', '.tsx', '.js', '.jsx', '.eot', '.svg', '.ttf', '.woff', '.woff2', '.png', '.css', '.ejs'],
+			extensions: ['.ts', '.tsx', '.js', '.jsx', '.eot', '.svg', '.ttf', '.woff', '.woff2', '.png', '.ejs', '.d.ts', '.css'],
 		},
 		module: {
 			rules: [
@@ -218,7 +227,8 @@ module.exports = () => {
 				{
 					test: /\.css$/,
 					use: [
-						{ loader: 'style-loader!css-loader' },
+						{ loader: 'style-loader' },
+						{ loader: 'css-loader' },
 					],
 				},
 				{

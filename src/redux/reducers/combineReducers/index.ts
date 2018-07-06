@@ -1,14 +1,19 @@
+import {
+	Reducer,
+	State,
+	Action,
+} from '../../../../@types/redux-types';
+
 // TODO: This file should have a much more complex Tivo - that we can use to move back and then forward in time.
+const Tivo: State[] = [];
 
-const Tivo = [];
-
-const combineReducers = (state, reducers, action) => {
+const combineReducers = (state: State, reducers: Reducer[], action: Action): State => {
 	if (Tivo.length === 0) {
 		Tivo.push(state);
 	}
 
 	reducers.forEach((reducer) => {
-		const nextReduction = reducer(Tivo[Tivo.length - 1], action, Tivo);
+		const nextReduction = reducer(Tivo[Tivo.length - 1], action);
 
 		Tivo.push(nextReduction);
 	});

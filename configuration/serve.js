@@ -17,7 +17,7 @@ const publicPath = path.join(rootPath, './dist');
 
 app.get('/*', (req, res, next) => {
 	if (req.originalUrl) {
-		console.log(chalk.green('Request made by client to: '), chalk.cyan(`http://localhost:${PORT}${req.originalUrl}`));
+		console.log(chalk.green('Client Request: '), chalk.cyan(`http://localhost:${PORT}${req.originalUrl}`));
 	}
 
 	next();

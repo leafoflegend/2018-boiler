@@ -1,7 +1,7 @@
 .PHONY: start-fe pre-publish test build-docs lint build-fe serve
 
 build-docs:
-	./node_modules/.bin/typedoc --out docs --readme README.md --target ES5 --name Application --includeDeclarations --excludeExternals
+	./node_modules/.bin/typedoc --options ./typedoc.js
 	touch ./docs/.nojekyll
 
 start-fe:
@@ -14,7 +14,6 @@ start-fe:
 build-fe:
 	yarn
 	npx ./node_modules/.bin/tsc
-	make build-docs
 	NODE_ENV=production node ./configuration/server
 
 pre-publish:

@@ -1,11 +1,14 @@
 import 'react-hot-loader/patch';
+import 'normalize.css/normalize.css';
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ProviderAndHistory from './redux';
 import Container from './react';
-import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 if (process.env.NODE_ENV === 'production') {
+	const OfflinePluginRuntime = require('offline-plugin/runtime');
+
 	OfflinePluginRuntime.install({
 		onUpdateReady: () => {
 			OfflinePluginRuntime.applyUpdate();
@@ -21,9 +24,11 @@ if (process.env.NODE_ENV === 'production') {
 const renderRoot = (Component: JSX.Element): void => {
 	ReactDOM.render(
 		<AppContainer>
-			{ Component }
+			<ProviderAndHistory>
+				{ Component }
+			</ProviderAndHistory>
 		</AppContainer>,
-	document.getElementById('app'),
+		document.getElementById('app'),
 );
 };
 

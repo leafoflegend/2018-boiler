@@ -72,10 +72,10 @@ if (process.env.NODE_ENV === 'development') {
 			compiler.attachedPublicPath = config.output.publicPath;
 			if (err || stats.hasErrors()) {
 				console.log(chalk.red(`Webpack failed to build a production build of ${applicationName}.`));
-				if (stats &&
-					stats.compilation &&
-					stats.compilation.errors &&
-					typeof stats.compilation.errors === 'object'
+				if (stats
+					&& stats.compilation
+					&& stats.compilation.errors
+					&& typeof stats.compilation.errors === 'object'
 				) {
 					stats.compilation.errors.forEach((error) => {
 						console.log(chalk.red(error));
@@ -99,4 +99,3 @@ if (process.env.NODE_ENV === 'development') {
 			console.log('🤠: Nawhaw!');
 		});
 }
-

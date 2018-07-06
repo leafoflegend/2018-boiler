@@ -1,7 +1,13 @@
-const modalReducer = (state, { type, data }) => {
+import {
+	Reducer,
+	State,
+	Action,
+} from '../../../../@types/redux-types';
+
+const modalReducer: Reducer = (state: State, { type, data }: Action): State => {
 	switch (type) {
-		default:
-			return state;
+	default:
+		return state;
 	}
 };
 

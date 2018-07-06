@@ -11,18 +11,25 @@
     "listEmittedFiles": true,
     "moduleResolution": "node",
     "lib": [ "es2015", "dom" ],
+    "preserveConstEnums": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "*",
+        "types/*"
+      ]
+    }
   },
   "compileOnSave": true,
   "include": [
     "src/**/*",
-    "types/**/*"
+    "types"
   ],
   "typeRoots": [
     "node_modules/@types",
-    "types"
+    "./@types"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.js"
+    "js/"
   ]
 }
