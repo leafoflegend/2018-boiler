@@ -1,4 +1,5 @@
-import { State } from '../../../@types/redux-types';
+import { Dispatch, State } from '../../../@types/redux-types';
+import { openModal } from '../action-creators';
 
 const initialState: State = {
 	APP_BAR: {
@@ -6,7 +7,10 @@ const initialState: State = {
 			open: false,
 			anchorEl: null,
 			menuItems: [
-				{ title: 'Login' },
+				{
+					title: 'Login',
+					dispatchCb: () => openModal('login'),
+				},
 			],
 		},
 		menu: {
@@ -15,7 +19,16 @@ const initialState: State = {
 		title: process.env.APPLICATION_NAME,
 	},
 	DRAWER: {},
-	MODAL: {},
+	MODAL: {
+		title: null,
+		content: null,
+		actions: null,
+		type: null,
+		open: false,
+		splitChunks: {
+			main: null,
+		},
+	},
 };
 
 export default initialState;

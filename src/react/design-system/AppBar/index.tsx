@@ -23,6 +23,10 @@ import {
 	MapStateToProps,
 	MapDispatchToProps,
 	Dispatch,
+	Action,
+	ActionCreator,
+	Thunk,
+	ThunkReturn,
 } from '../../../../@types/redux-types';
 
 interface StateProps {
@@ -30,12 +34,13 @@ interface StateProps {
 	title: string;
 	userAnchor: HTMLElement | null;
 	userOpen: boolean;
-	userMenuItems: { title: string }[];
+	userMenuItems: { title: string, dispatchCb: ActionCreator | Thunk }[];
 }
 
 interface DispatchProps {
 	toggleMenu: (isOpen: boolean) => void;
 	toggleUserMenu: (data: { open: boolean, node: Node | null }) => void;
+	dispatch: (actionOrThunk: Action | ThunkReturn) => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -60,6 +65,7 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
 			userAnchor,
 			userOpen,
 			userMenuItems,
+			dispatch,
 		} = this.props;
 
 		if (userMenuItems && userMenuItems.length) {
@@ -88,9 +94,13 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
 						onClose={ () => { toggleUserMenu({ open: false, node: null }); } }
 					>
 						{
-							userMenuItems.map(({ title }) => (
+							userMenuItems.map(({ title, dispatchCb }) => (
 								<MenuItem
 									key={ title }
+									onClick={ () => {
+										toggleUserMenu({ open: false, node: null });
+										dispatch(dispatchCb());
+									} }
 								>
 									{ title }
 								</MenuItem>
@@ -159,6 +169,7 @@ const mapStateToProps: MapStateToProps<StateProps> = ({
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps> = (dispatch: Dispatch) => ({
+	dispatch,
 	toggleMenu: (isOpen: boolean) => { dispatch(toggleAppBarMenu(!isOpen)); },
 	toggleUserMenu: ({ open, node = null }: { open: boolean, node: HTMLElement | null }) => {
 		dispatch(toggleAppBarUserMenu({ node, open }));

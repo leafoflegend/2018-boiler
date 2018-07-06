@@ -4,8 +4,8 @@ import React, {
 } from 'react';
 import ApplicationTheme from './themes';
 import {
-	AppBar,
-} from './design-system';
+	Home,
+} from './pages';
 
 interface Props {
 	children?: ReactNode;
@@ -25,7 +25,7 @@ class RootReactContainer extends Component<Props> {
 
 const rootRenderFunction: () => Promise<JSX.Element> = async () => (
 	<RootReactContainer>
-		<AppBar />
+		<Home />
 	</RootReactContainer>
 );
 
