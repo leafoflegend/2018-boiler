@@ -1,9 +1,9 @@
 import React, {
 	ReactNode,
 } from 'react';
+import { Dispatch } from 'redux';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
-import { Dispatch } from '../../@types/redux-types';
 import { closeModal } from '../redux/action-creators';
 
 type ModalHydrationObj = {

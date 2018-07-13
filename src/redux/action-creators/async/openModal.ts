@@ -1,16 +1,16 @@
 import { ComponentClass } from 'react';
+import { Dispatch } from 'redux';
 import {
-	Thunk,
-	Dispatch,
-	GetState,
 	State,
+	ThunkFunc,
 } from '../../../../@types/redux-types';
+import { ModalClass } from '../../../react/design-system/Modal';
 import {
 	loadModalChunk,
 	modalOpen,
 } from '../sync';
 
-const openModal: Thunk = (type: string) => async (dispatch: Dispatch, getState: GetState) => {
+const openModal: ThunkFunc = (type: string) => async (dispatch: Dispatch, getState) => {
 	const currentState: State = getState();
 
 	const {
@@ -22,7 +22,7 @@ const openModal: Thunk = (type: string) => async (dispatch: Dispatch, getState: 
 	} = currentState;
 
 	if (!main) {
-		let Modal: { default: ComponentClass } | null = null;
+		let Modal: { default: ModalClass };
 
 		try {
 			Modal = await import('../../../react/design-system/Modal');

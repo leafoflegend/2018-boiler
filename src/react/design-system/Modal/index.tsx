@@ -2,6 +2,7 @@ import React, {
 	Component,
 	ReactNode,
 } from 'react';
+import { Dispatch } from 'redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -14,8 +15,7 @@ import {
 } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {
-	MapStateToProps,
-	MapDispatchToProps,
+	State,
 } from '../../../../@types/redux-types';
 import { closeModal } from '../../../redux/action-creators';
 
@@ -54,6 +54,8 @@ class Modal extends Component<Props & WithStyles<typeof styles>> {
 				fullScreen={ fullScreen }
 				open={ open }
 				onClose={ modalClose }
+				maxWidth={ 'sm' }
+				fullWidth
 				aria-labelledby={ 'responsive-dialog-title' }
 			>
 				<DialogTitle
@@ -76,9 +78,11 @@ const decorateModal = withStyles(styles);
 
 const StyledModal = decorateModal<Props>(Modal);
 
-const ResponsiveStyledModal = withMobileDialog()(StyledModal);
+const ResponsiveStyledModal = withMobileDialog<any>()(StyledModal);
 
-const mapStateToProps: MapStateToProps<StateProps> = ({
+type MapStateToProps = (state: State) => StateProps;
+
+const mapStateToProps: MapStateToProps = ({
 	MODAL: {
 		open,
 		title,
@@ -92,10 +96,14 @@ const mapStateToProps: MapStateToProps<StateProps> = ({
 	actions,
 });
 
-const mapDispatchToProps: MapDispatchToProps<DispatchProps> = dispatch => ({
-	modalClose: () => { closeModal(); },
+type MapDispatchToProps = (dispatch: Dispatch) => DispatchProps;
+
+const mapDispatchToProps: MapDispatchToProps = dispatch => ({
+	modalClose: () => { dispatch(closeModal()); },
 });
 
-const ConnectedResponsiveStyledModal = connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(ResponsiveStyledModal);
+const ConnectedResponsiveStyledModal = connect<StateProps, DispatchProps, void, State>(mapStateToProps, mapDispatchToProps)(ResponsiveStyledModal);
+
+export type ModalClass = typeof ConnectedResponsiveStyledModal;
 
 export default ConnectedResponsiveStyledModal;

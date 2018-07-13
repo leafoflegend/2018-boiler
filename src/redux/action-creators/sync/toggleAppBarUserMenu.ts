@@ -1,10 +1,10 @@
+import { ActionCreator } from 'redux';
 import {
 	Constants,
-	Action,
-	ActionCreator,
+	SpecificAction,
 } from '../../../../@types/redux-types';
 
-const toggleAppBarUserMenu: ActionCreator = ({ open, node = null }: { open: boolean, node: Node | null }): Action => ({
+const toggleAppBarUserMenu: ActionCreator<SpecificAction> = ({ open, node = null }: { open: boolean, node: Node | null }): SpecificAction => ({
 	type: Constants.APP_BAR_TOGGLE_USER_MENU,
 	data: {
 		open,

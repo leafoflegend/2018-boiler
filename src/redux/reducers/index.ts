@@ -1,6 +1,6 @@
 import {
 	State,
-	Action,
+	SpecificAction,
 } from '../../../@types/redux-types';
 
 import initialState from './initial-state';
@@ -9,7 +9,7 @@ import drawerReducer from './drawerReducer';
 import modalReducer from './modalReducer';
 import combineReducers from './combineReducers';
 
-const rootReducer = (state: State = initialState, action: Action): State => combineReducers(
+const rootReducer = (state: State = initialState, action: SpecificAction): State => combineReducers(
 	state,
 	[
 		appBarReducer,

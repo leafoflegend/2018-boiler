@@ -1,10 +1,10 @@
+import { Reducer } from 'redux';
 import {
-	Reducer,
 	State,
-	Action,
+	SpecificAction,
 } from '../../../../@types/redux-types';
 
-const drawerReducer: Reducer = (state: State, { type, data }: Action): State => {
+const drawerReducer: Reducer = (state: State, { type, data }: SpecificAction): State => {
 	switch (type) {
 	default:
 		return state;

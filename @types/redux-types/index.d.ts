@@ -1,12 +1,16 @@
-import { ReactNode, ComponentClass } from 'react';
+import { ReactNode } from 'react';
+import { ActionCreator, Action } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ModalClass } from '../../src/react/design-system/Modal';
+import { State } from '../../@types/redux-types';
 
 export interface State {
 	APP_BAR: {
-		title: string;
+		title: string | undefined;
 		userMenu: {
 			open: boolean;
-			anchorEl: null | HTMLElement;
-			menuItems: { title: string, dispatchCb: ActionCreator | Thunk }[];
+			anchorEl: undefined | HTMLElement;
+			menuItems: { title: string, dispatchCb: any }[];
 		};
 		menu: {
 			open: boolean;
@@ -20,7 +24,7 @@ export interface State {
 		actions: string | ReactNode | null;
 		open: boolean;
 		splitChunks: {
-			main: null | ComponentClass;
+			main: null | ModalClass;
 		};
 	};
 	router?: {
@@ -42,26 +46,19 @@ export const enum Constants {
 	MODAL_LOAD_CHUNK = '@@modal/LOAD_CHUNK',
 }
 
-export type Action = { type: Constants, data?: any };
-
-export type ActionCreator = (data?: any) => Action;
-
-export type Dispatch = (action: Action) => void;
-
-export type DispatchThunk = (thunk: Thunk) => void;
-
-export type MapStateToProps<R, P = {}> = (currentState: State, ownProps?: P) => R;
-
-export type MapDispatchToProps<R, P = {}> = (dispatch: Dispatch | DispatchThunk, ownProps?: P) => R;
-
-export type Reducer = (state: State, action: Action) => State;
-
-type GetState = () => State;
-
-export type ThunkReturn = (dispatch: Dispatch, getState: GetState) => Promise<void>;
-
-export type Thunk = (...args: any[]) => ThunkReturn;
-
 export type ConstantDictionary = {
 	[typeName in Constants]: Constants;
 };
+
+export interface SpecificAction extends Action<Constants> {
+	data?: any;
+}
+
+export type ThunkResult<R> = ThunkAction<R, State, undefined, SpecificAction>;
+
+export type ThunkFunc = (...data: any[]) => ThunkResult<void>;
+
+export interface SpecificCreator extends SpecificAction {
+	(...args: any[]): ThunkResult<void>;
+	(...args: any[]): SpecificAction;
+}

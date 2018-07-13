@@ -1,10 +1,10 @@
+import { ActionCreator } from 'redux';
 import {
 	Constants,
-	Action,
-	ActionCreator,
+	SpecificAction,
 } from '../../../../@types/redux-types';
 
-const closeModal: ActionCreator = (): Action => ({
+const closeModal: ActionCreator<SpecificAction> = (): SpecificAction => ({
 	type: Constants.MODAL_LOAD_CHUNK,
 	data: null,
 });

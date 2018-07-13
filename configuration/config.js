@@ -23,6 +23,10 @@ const {
 	applicationThemeFonts,
 } = require('../boilerconfig');
 
+// TODO: Take a look at https://github.com/wmonk/create-react-app-typescript/blob/master/packages/react-scripts/config/webpack.config.dev.js#L279
+// TODO: https://github.com/wmonk/create-react-app-typescript/blob/master/packages/react-scripts/config/webpack.config.dev.js#L271
+
+
 module.exports = () => {
 	const isDevelopment = process.env.NODE_ENV === 'development';
 	const isProduction = process.env.NODE_ENV === 'production';

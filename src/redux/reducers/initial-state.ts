@@ -1,11 +1,11 @@
-import { Dispatch, State } from '../../../@types/redux-types';
+import { State } from '../../../@types/redux-types';
 import { openModal } from '../action-creators';
 
 const initialState: State = {
 	APP_BAR: {
 		userMenu: {
 			open: false,
-			anchorEl: null,
+			anchorEl: undefined,
 			menuItems: [
 				{
 					title: 'Login',

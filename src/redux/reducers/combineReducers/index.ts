@@ -1,13 +1,13 @@
+import { Reducer } from 'redux';
 import {
-	Reducer,
 	State,
-	Action,
+	SpecificAction,
 } from '../../../../@types/redux-types';
 
 // TODO: This file should have a much more complex Tivo - that we can use to move back and then forward in time.
 const Tivo: State[] = [];
 
-const combineReducers = (state: State, reducers: Reducer[], action: Action): State => {
+const combineReducers = (state: State, reducers: Reducer[], action: SpecificAction): State => {
 	if (Tivo.length === 0) {
 		Tivo.push(state);
 	}

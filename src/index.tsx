@@ -22,19 +22,30 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const renderRoot = (Component: JSX.Element): void => {
-	ReactDOM.render(
-		<AppContainer>
-			<ProviderAndHistory>
-				{ Component }
-			</ProviderAndHistory>
-		</AppContainer>,
-		document.getElementById('app'),
-);
+	if (process.env.NODE_ENV === 'development') {
+		ReactDOM.render(
+			<AppContainer>
+				<ProviderAndHistory>
+					{ Component }
+				</ProviderAndHistory>
+			</AppContainer>,
+			document.getElementById('app'),
+		);
+	}
+
+	if (process.env.NODE_ENV === 'production') {
+		ReactDOM.render(
+				<ProviderAndHistory>
+					{ Component }
+				</ProviderAndHistory>,
+				document.getElementById('app'),
+		);
+	}
 };
 
 Container().then(renderRoot);
 
-if (module.hot) {
+if (module.hot && process.env.NODE_ENV === 'development') {
 	module.hot.accept('./react', () => {
 		const NextContainer: () => Promise<JSX.Element> = require('./react').default;
 		NextContainer()

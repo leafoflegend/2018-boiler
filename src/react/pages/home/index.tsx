@@ -1,15 +1,15 @@
 import React, {
 	Component,
-	ComponentClass,
 } from 'react';
 import { connect } from 'react-redux';
 import {
 	AppBar,
 } from '../../design-system';
-import { MapStateToProps } from '../../../../@types/redux-types';
+import { ModalClass } from '../../design-system/Modal';
+import { State } from '../../../../@types/redux-types';
 
 interface StateProps {
-	Modal: ComponentClass | null;
+	Modal: ModalClass | null;
 }
 
 type Props = StateProps;
@@ -21,16 +21,25 @@ class Home extends Component<Props> {
 		return (
 			<>
 				<AppBar />
-				{ Modal ? <Modal /> : null }
+				{
+					Modal
+						?
+							(
+								<Modal/>
+							)
+						: null
+				}
 			</>
 		);
 	}
 }
 
-const mapStateToProps: MapStateToProps<StateProps> = ({ MODAL: { splitChunks: { main } } }) => ({
+type MapStateToProps = (state: State) => StateProps;
+
+const mapStateToProps: MapStateToProps = ({ MODAL: { splitChunks: { main } } }) => ({
 	Modal: main,
 });
 
-const ConnectedHome = connect<StateProps>(mapStateToProps)(Home);
+const ConnectedHome = connect<StateProps, void, void, State>(mapStateToProps)(Home);
 
 export default ConnectedHome;

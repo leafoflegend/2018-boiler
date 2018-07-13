@@ -6,25 +6,25 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, Store, Middleware } from 'redux';
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware, { ThunkMiddleware } from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createBrowserHistory } from 'history';
 import rootReducer from '../reducers';
+import { SpecificAction, State } from '../../../@types/redux-types';
 
 const history = createBrowserHistory();
 
-let store: Store | null = null;
+let store: Store;
 
 let myMiddleware: Middleware[] = [
 	routerMiddleware(history),
-	thunkMiddleware,
+	thunkMiddleware as ThunkMiddleware<State, SpecificAction, any>,
 ];
 
 if (process.env.NODE_ENV === 'production') {
 	myMiddleware = [thunkMiddleware];
 
 	store = createStore(
-		// @ts-ignore
 		connectRouter(history)(rootReducer),
 		applyMiddleware(
 			...myMiddleware,
@@ -36,7 +36,6 @@ if (process.env.NODE_ENV === 'production') {
 	}));
 
 	store = createStore(
-		// @ts-ignore
 		connectRouter(history)(rootReducer),
 		composeWithDevTools(
 			applyMiddleware(

@@ -1,10 +1,10 @@
+import { ActionCreator } from 'redux';
 import {
 	Constants,
-	Action,
-	ActionCreator,
+	SpecificAction,
 } from '../../../../@types/redux-types';
 
-const loadModalChunk: ActionCreator = (chunk: JSX.Element): Action => ({
+const loadModalChunk: ActionCreator<SpecificAction> = (chunk: JSX.Element): SpecificAction => ({
 	type: Constants.MODAL_LOAD_CHUNK,
 	data: chunk,
 });

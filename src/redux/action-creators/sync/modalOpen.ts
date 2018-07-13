@@ -1,10 +1,10 @@
+import { ActionCreator } from 'redux';
 import {
 	Constants,
-	Action,
-	ActionCreator,
+	SpecificAction,
 } from '../../../../@types/redux-types';
 
-const modalOpen: ActionCreator = (type: string): Action => ({
+const modalOpen: ActionCreator<SpecificAction> = (type: string): SpecificAction => ({
 	type: Constants.MODAL_OPEN,
 	data: type,
 });

@@ -1,6 +1,7 @@
 import React, {
 	Component,
 } from 'react';
+import { Dispatch } from 'redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,28 +20,20 @@ import {
 	toggleAppBarMenu,
 	toggleAppBarUserMenu,
 } from '../../../redux/action-creators';
-import {
-	MapStateToProps,
-	MapDispatchToProps,
-	Dispatch,
-	Action,
-	ActionCreator,
-	Thunk,
-	ThunkReturn,
-} from '../../../../@types/redux-types';
+import { State, SpecificCreator } from '../../../../@types/redux-types';
 
 interface StateProps {
 	open: boolean;
-	title: string;
-	userAnchor: HTMLElement | null;
+	title: string | undefined;
+	userAnchor: HTMLElement | undefined;
 	userOpen: boolean;
-	userMenuItems: { title: string, dispatchCb: ActionCreator | Thunk }[];
+	userMenuItems: { title: string, dispatchCb: any }[];
 }
 
 interface DispatchProps {
 	toggleMenu: (isOpen: boolean) => void;
-	toggleUserMenu: (data: { open: boolean, node: Node | null }) => void;
-	dispatch: (actionOrThunk: Action | ThunkReturn) => void;
+	toggleUserMenu: (data: { open: boolean, node: HTMLElement | null }) => void;
+	dispatch: Dispatch;
 }
 
 type Props = StateProps & DispatchProps;
@@ -72,7 +65,7 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
 			return (
 				<div>
 					<IconButton
-						aria-owns={ open ? 'user-menu-appbar' : null }
+						aria-owns={ open ? 'user-menu-appbar' : undefined }
 						aria-haspopup={ 'true' }
 						color={ 'inherit' }
 						onClick={ ({ currentTarget }) => { toggleUserMenu({ open: true, node: currentTarget }); } }
@@ -152,7 +145,9 @@ const decorateApplicationBar = withStyles(styles);
 
 const StyledApplicationBar = decorateApplicationBar<Props>(ApplicationBar);
 
-const mapStateToProps: MapStateToProps<StateProps> = ({
+type MapStateToProps = (state: State) => StateProps;
+
+const mapStateToProps: MapStateToProps = ({
 	APP_BAR: {
 		menu: {
 			open,
@@ -168,7 +163,9 @@ const mapStateToProps: MapStateToProps<StateProps> = ({
 	userMenuItems: userMenu.menuItems,
 });
 
-const mapDispatchToProps: MapDispatchToProps<DispatchProps> = (dispatch: Dispatch) => ({
+type MapDispatchToProps = (dispatch: Dispatch) => DispatchProps;
+
+const mapDispatchToProps: MapDispatchToProps = dispatch => ({
 	dispatch,
 	toggleMenu: (isOpen: boolean) => { dispatch(toggleAppBarMenu(!isOpen)); },
 	toggleUserMenu: ({ open, node = null }: { open: boolean, node: HTMLElement | null }) => {
@@ -176,6 +173,6 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps> = (dispatch: Dispatc
 	},
 });
 
-const ConnectedApplicationBar = connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(StyledApplicationBar);
+const ConnectedApplicationBar = connect<StateProps, DispatchProps, void, State>(mapStateToProps, mapDispatchToProps)(StyledApplicationBar);
 
 export default ConnectedApplicationBar;

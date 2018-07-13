@@ -9,10 +9,13 @@ import {
 } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 
+// @ts-ignore
 const themeColor: string = process.env.APPLICATION_THEME_COLOR;
+// @ts-ignore
 const themeSecondaryColor: string = process.env.APPLICATION_THEME_SECONDARY_COLOR;
 // @ts-ignore
 const themeType: 'light' | 'dark' = process.env.APPLICATION_THEME_TYPE;
+// @ts-ignore
 const themeFonts: string = process.env.APPLICATION_THEME_FONTS;
 
 const applicationTheme: Theme = createMuiTheme({
