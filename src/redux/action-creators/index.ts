@@ -1,19 +1,10 @@
 import {
-	toggleAppBarMenu,
-	toggleAppBarUserMenu,
-	closeModal,
-	loadModalChunk,
-	modalOpen,
+  toggleAppBarMenu,
+  toggleAppBarUserMenu,
+  closeModal,
+  loadModalChunk,
+  modalOpen,
 } from './sync';
-import {
-	openModal,
-} from './async';
+import {openModal} from './async';
 
-export {
-	toggleAppBarMenu,
-	toggleAppBarUserMenu,
-	closeModal,
-	loadModalChunk,
-	modalOpen,
-	openModal,
-};
+export {toggleAppBarMenu, toggleAppBarUserMenu, closeModal, loadModalChunk, modalOpen, openModal};

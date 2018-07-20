@@ -1,0 +1,6 @@
+node_modules/
+.awcache/
+@types/
+configuration/
+dist/
+docs/

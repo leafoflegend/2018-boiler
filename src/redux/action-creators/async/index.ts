@@ -1,5 +1,3 @@
 import openModal from './openModal';
 
-export {
-	openModal,
-};
+export {openModal};

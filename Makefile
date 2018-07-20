@@ -1,7 +1,7 @@
 .PHONY: start-fe pre-publish test build-docs lint build-fe serve
 
 build-docs:
-	./node_modules/.bin/typedoc --options ./typedoc.js
+	npx ./node_modules/.bin/typedoc --options ./typedoc.js
 	touch ./docs/.nojekyll
 
 start-fe:
@@ -14,6 +14,7 @@ start-fe:
 build-fe:
 	yarn
 	npx ./node_modules/.bin/tsc
+	make lint
 	NODE_ENV=production node ./configuration/server
 
 pre-publish:
@@ -23,8 +24,16 @@ pre-publish:
 	make build-docs
 
 lint:
-	yarn
+	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" --prettier-last --write
 	npx ./node_modules/.bin/tslint ./src
+	npx ./node_modules/.bin/eslint ./js
+
+pre-commit:
+	npx ./node_modules/.bin/tsc
+	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" --prettier-last --write
+	npx ./node_modules/.bin/tslint ./src
+	npx ./node_modules/.bin/eslint ./js
+	git add -A
 
 test:
 	yarn

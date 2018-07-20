@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Action } from 'redux';
-import { ThunkAction } from 'redux-thunk';
 import { ModalClass } from '../../src/react/design-system/Modal';
 import { State, SpecificAction } from '../../@types/redux-types';
 
@@ -55,11 +54,7 @@ export interface SpecificAction extends Action<Constants> {
 	data?: any;
 }
 
-export type ThunkResult<R> = ThunkAction<R, State, undefined, SpecificAction>;
-
-export type ThunkFunc = (...data: any[]) => ThunkResult<void>;
-
-export interface ThunkActionCreator {
-	<T extends SpecificAction>(...args: any[]): T;
-	<R = void>(...args: any[]): ThunkAction<R, State, any, Action<Constants>>;
-}
+// export interface ThunkActionCreator {
+// 	<T extends SpecificAction>(...args: any[]): T;
+// 	<R = void>(...args: any[]): ThunkAction<R, State, any, Action<Constants>>;
+// }
