@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { ActionCreator, Action } from 'redux';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { Action } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import { ModalClass } from '../../src/react/design-system/Modal';
-import { State } from '../../@types/redux-types';
+import { State, SpecificAction } from '../../@types/redux-types';
 
 export interface State {
 	APP_BAR: {
@@ -10,7 +10,8 @@ export interface State {
 		userMenu: {
 			open: boolean;
 			anchorEl: undefined | HTMLElement;
-			menuItems: { title: string, dispatchCb: any }[];
+			// TODO: any for dispatchCb is no bueno
+			menuItems: { title: string, dispatchCb: ThunkActionCreator }[];
 		};
 		menu: {
 			open: boolean;
@@ -58,7 +59,7 @@ export type ThunkResult<R> = ThunkAction<R, State, undefined, SpecificAction>;
 
 export type ThunkFunc = (...data: any[]) => ThunkResult<void>;
 
-export interface SpecificCreator extends SpecificAction {
-	(...args: any[]): ThunkResult<void>;
-	(...args: any[]): SpecificAction;
+export interface ThunkActionCreator {
+	<T extends SpecificAction>(...args: any[]): T;
+	<R = void>(...args: any[]): ThunkAction<R, State, any, Action<Constants>>;
 }

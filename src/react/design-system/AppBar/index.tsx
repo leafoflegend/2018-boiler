@@ -20,14 +20,14 @@ import {
 	toggleAppBarMenu,
 	toggleAppBarUserMenu,
 } from '../../../redux/action-creators';
-import { State, SpecificCreator } from '../../../../@types/redux-types';
+import { State, ThunkActionCreator } from '../../../../@types/redux-types';
 
 interface StateProps {
 	open: boolean;
 	title: string | undefined;
 	userAnchor: HTMLElement | undefined;
 	userOpen: boolean;
-	userMenuItems: { title: string, dispatchCb: any }[];
+	userMenuItems: { title: string, dispatchCb: ThunkActionCreator }[];
 }
 
 interface DispatchProps {
