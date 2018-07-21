@@ -1,6 +1,6 @@
 import 'react-hot-loader/patch';
 import 'normalize.css/normalize.css';
-import {AppContainer} from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ProviderAndHistory from './redux';

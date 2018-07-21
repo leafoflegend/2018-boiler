@@ -1,14 +1,14 @@
-import React, {Component, ReactNode} from 'react';
-import {Dispatch} from 'redux';
+import React, { Component, ReactNode } from 'react';
+import { Dispatch } from 'redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
-import {withStyles, WithStyles, createStyles} from '@material-ui/core/styles';
-import {connect} from 'react-redux';
-import {State} from '../../../../@types/redux-types';
-import {closeModal} from '../../../redux/action-creators';
+import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { State } from '../../../../@types/redux-types';
+import { closeModal } from '../../../redux/action-creators';
 
 const styles = createStyles({});
 
@@ -31,7 +31,7 @@ type Props = StateProps & DispatchProps & MuiProps;
 
 class Modal extends Component<Props & WithStyles<typeof styles>> {
   public render() {
-    const {fullScreen, open, modalClose, title, content, actions} = this.props;
+    const { fullScreen, open, modalClose, title, content, actions } = this.props;
 
     return (
       <Dialog
@@ -58,7 +58,7 @@ const ResponsiveStyledModal = withMobileDialog<any>()(StyledModal);
 
 type MapStateToProps = (state: State) => StateProps;
 
-const mapStateToProps: MapStateToProps = ({MODAL: {open, title, content, actions}}) => ({
+const mapStateToProps: MapStateToProps = ({ MODAL: { open, title, content, actions } }) => ({
   open,
   title,
   content,

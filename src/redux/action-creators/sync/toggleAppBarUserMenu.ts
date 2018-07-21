@@ -1,5 +1,5 @@
-import {ActionCreator} from 'redux';
-import {Constants, SpecificAction} from '../../../../@types/redux-types';
+import { ActionCreator } from 'redux';
+import { Constants, SpecificAction } from '../../../../@types/redux-types';
 
 const toggleAppBarUserMenu: ActionCreator<SpecificAction> = ({
   open,

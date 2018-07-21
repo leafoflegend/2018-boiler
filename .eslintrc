@@ -18,7 +18,7 @@
     "prettier/prettier": "error",
     "no-bitwise": ["error", { "allow": ["~"] }],
     "no-tabs": 1,
-    "indent": ["error", 2],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "new-cap": [2, { "newIsCap": true, "capIsNew": false }],
     "space-before-function-paren": [0, "always"],
     "arrow-body-style": [0, "always"],
@@ -47,6 +47,7 @@
     "react/jsx-closing-tag-location": 0,
     "react/prefer-stateless-function": 0,
     "jsx-a11y/aria-proptypes": 0,
-    "no-useless-escape": 0
+    "no-useless-escape": 0,
+    "lines-between-class-members": 0
   }
 }

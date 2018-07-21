@@ -1,6 +1,6 @@
-import React, {Component, ReactNode} from 'react';
+import React, { Component, ReactNode } from 'react';
 import ApplicationTheme from './themes';
-import {Home} from './pages';
+import { Home } from './pages';
 
 interface Props {
   children?: ReactNode;
@@ -8,7 +8,7 @@ interface Props {
 
 class RootReactContainer extends Component<Props> {
   public render() {
-    const {children} = this.props;
+    const { children } = this.props;
 
     return <ApplicationTheme>{children}</ApplicationTheme>;
   }

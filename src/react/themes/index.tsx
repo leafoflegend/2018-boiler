@@ -1,6 +1,6 @@
-import React, {Component, ReactNode} from 'react';
-import {createMuiTheme, Theme, MuiThemeProvider} from '@material-ui/core';
-import {red} from '@material-ui/core/colors';
+import React, { Component, ReactNode } from 'react';
+import { createMuiTheme, Theme, MuiThemeProvider } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 // @ts-ignore
 const themeColor: string = process.env.APPLICATION_THEME_COLOR;
@@ -35,19 +35,18 @@ interface Props {
 }
 
 class ApplicationTheme extends Component<Props> {
-  public render() {
-    const {children} = this.props;
-    const {muiTheme}: {muiTheme?: Theme} = this.context;
+  get ThemeWrapper() {
+    const { children } = this.props;
+    const { muiTheme }: { muiTheme?: Theme } = this.context;
 
-    return (
-      <>
-        ' \' \' \' \' \' \' \' \' \' \' \' \' \' \' '{!muiTheme && children ? (
-          <MuiThemeProvider theme={applicationTheme}>{children}</MuiThemeProvider>
-        ) : children ? (
-          children
-        ) : null}' '
-      </>
+    return !muiTheme && children ? (
+      <MuiThemeProvider theme={applicationTheme}>{children}</MuiThemeProvider>
+    ) : (
+      children && null
     );
+  }
+  public render() {
+    return this.ThemeWrapper;
   }
 }
 

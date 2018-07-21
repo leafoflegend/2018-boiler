@@ -24,15 +24,13 @@ pre-publish:
 	make build-docs
 
 lint:
-	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" --prettier-last --write
-	npx ./node_modules/.bin/tslint ./src
+	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" "@types/**/*.ts" --write
+	npx ./node_modules/.bin/tslint --project ./tsconfig.json
 	npx ./node_modules/.bin/eslint ./js
 
 pre-commit:
 	npx ./node_modules/.bin/tsc
-	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" --prettier-last --write
-	npx ./node_modules/.bin/tslint ./src
-	npx ./node_modules/.bin/eslint ./js
+	make lint
 	git add -A
 
 test:

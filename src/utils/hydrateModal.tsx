@@ -1,8 +1,8 @@
-import React, {ReactNode} from 'react';
-import {Dispatch} from 'redux';
+import React, { ReactNode } from 'react';
+import { Dispatch } from 'redux';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
-import {closeModal} from '../redux/action-creators';
+import { closeModal } from '../redux/action-creators';
 
 type ModalHydrationObj = {
   title: null | string | ReactNode;
@@ -11,7 +11,13 @@ type ModalHydrationObj = {
 };
 
 // TODO: Again, type feels like it should be an ENUM.
-const hydrateModal = ({type, dispatch}: {type: string; dispatch: Dispatch}): ModalHydrationObj => {
+const hydrateModal = ({
+  type,
+  dispatch,
+}: {
+  type: string;
+  dispatch: Dispatch;
+}): ModalHydrationObj => {
   switch (type) {
     case 'login':
       return {

@@ -1,7 +1,7 @@
-import {Reducer} from 'redux';
-import {State, Constants, SpecificAction} from '../../../../@types/redux-types';
+import { Reducer } from 'redux';
+import { State, Constants, SpecificAction } from '../../../../@types/redux-types';
 
-const appBarReducer: Reducer = (state: State, {type, data}: SpecificAction): State => {
+const appBarReducer: Reducer = (state: State, { type, data }: SpecificAction): State => {
   switch (type) {
     case Constants.APP_BAR_TOGGLE_MENU:
       return {

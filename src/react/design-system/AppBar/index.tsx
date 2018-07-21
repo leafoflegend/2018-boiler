@@ -1,29 +1,29 @@
-import React, {Component} from 'react';
-import {Dispatch} from 'redux';
+import React, { Component } from 'react';
+import { Dispatch, ActionCreator } from 'redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import {withStyles, WithStyles, createStyles} from '@material-ui/core/styles';
+import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import {connect} from 'react-redux';
-import {toggleAppBarMenu, toggleAppBarUserMenu} from '../../../redux/action-creators';
-import {State, ThunkActionCreator} from '../../../../@types/redux-types';
+import { connect } from 'react-redux';
+import { toggleAppBarMenu, toggleAppBarUserMenu } from '../../../redux/action-creators';
+import { State, SpecificAction } from '../../../../@types/redux-types';
 
 interface StateProps {
   open: boolean;
   title: string | undefined;
   userAnchor: HTMLElement | undefined;
   userOpen: boolean;
-  userMenuItems: {title: string; dispatchCb: ThunkActionCreator}[];
+  userMenuItems: { title: string; dispatchCb: ActionCreator<SpecificAction> }[];
 }
 
 interface DispatchProps {
   toggleMenu: (isOpen: boolean) => void;
-  toggleUserMenu: (data: {open: boolean; node: HTMLElement | null}) => void;
+  toggleUserMenu: (data: { open: boolean; node: HTMLElement | null }) => void;
   dispatch: Dispatch;
 }
 
@@ -44,7 +44,7 @@ const styles = createStyles({
 
 class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
   get UserMenu() {
-    const {toggleUserMenu, userAnchor, userOpen, userMenuItems, dispatch, open} = this.props;
+    const { toggleUserMenu, userAnchor, userOpen, userMenuItems, dispatch, open } = this.props;
 
     if (userMenuItems && userMenuItems.length) {
       return (
@@ -53,8 +53,8 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
             aria-owns={open ? 'user-menu-appbar' : undefined}
             aria-haspopup="true"
             color="inherit"
-            onClick={({currentTarget}) => {
-              toggleUserMenu({open: true, node: currentTarget});
+            onClick={({ currentTarget }) => {
+              toggleUserMenu({ open: true, node: currentTarget });
             }}
           >
             <AccountCircle />
@@ -72,14 +72,14 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
             }}
             open={userOpen}
             onClose={() => {
-              toggleUserMenu({open: false, node: null});
+              toggleUserMenu({ open: false, node: null });
             }}
           >
-            {userMenuItems.map(({title, dispatchCb}) => (
+            {userMenuItems.map(({ title, dispatchCb }) => (
               <MenuItem
                 key={title}
                 onClick={() => {
-                  toggleUserMenu({open: false, node: null});
+                  toggleUserMenu({ open: false, node: null });
                   dispatch(dispatchCb());
                 }}
               >
@@ -95,7 +95,7 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
   }
 
   public render() {
-    const {open, title, toggleMenu, classes} = this.props;
+    const { open, title, toggleMenu, classes } = this.props;
 
     return (
       <AppBar position="static">
@@ -127,7 +127,7 @@ type MapStateToProps = (state: State) => StateProps;
 
 const mapStateToProps: MapStateToProps = ({
   APP_BAR: {
-    menu: {open},
+    menu: { open },
     title,
     userMenu,
   },
@@ -146,8 +146,8 @@ const mapDispatchToProps: MapDispatchToProps = dispatch => ({
   toggleMenu: (isOpen: boolean) => {
     dispatch(toggleAppBarMenu(!isOpen));
   },
-  toggleUserMenu: ({open, node = null}: {open: boolean; node: HTMLElement | null}) => {
-    dispatch(toggleAppBarUserMenu({node, open}));
+  toggleUserMenu: ({ open, node = null }: { open: boolean; node: HTMLElement | null }) => {
+    dispatch(toggleAppBarUserMenu({ node, open }));
   },
 });
 

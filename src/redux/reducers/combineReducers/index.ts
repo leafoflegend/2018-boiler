@@ -1,5 +1,5 @@
-import {Reducer} from 'redux';
-import {State, SpecificAction} from '../../../../@types/redux-types';
+import { Reducer } from 'redux';
+import { State, SpecificAction } from '../../../../@types/redux-types';
 
 // TODO: This file should have a much more complex Tivo - that we can use to move back and then forward in time.
 const Tivo: State[] = [];

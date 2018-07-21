@@ -1,5 +1,5 @@
-import {State} from '../../../@types/redux-types';
-import {openModal} from '../action-creators';
+import { State } from '../../../@types/redux-types';
+import { openModal } from '../action-creators';
 
 const initialState: State = {
   APP_BAR: {

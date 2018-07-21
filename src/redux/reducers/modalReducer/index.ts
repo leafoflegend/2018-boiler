@@ -1,8 +1,8 @@
-import {Reducer} from 'redux';
-import {State, SpecificAction, Constants} from '../../../../@types/redux-types';
-import {hydrateModal} from '../../../utils';
+import { Reducer } from 'redux';
+import { State, SpecificAction, Constants } from '../../../../@types/redux-types';
+import { hydrateModal } from '../../../utils';
 
-const modalReducer: Reducer = (state: State, {type, data}: SpecificAction): State => {
+const modalReducer: Reducer = (state: State, { type, data }: SpecificAction): State => {
   switch (type) {
     case Constants.MODAL_LOAD_CHUNK:
       return {
