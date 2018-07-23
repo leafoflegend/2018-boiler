@@ -1,8 +1,9 @@
-import { select, call, put } from 'redux-saga/effects';
-import { Dispatch } from 'redux';
-import { State, Constants, SpecificAction } from '../../../../@types/redux-types';
+import { effects } from 'redux-saga';
+import { State, SpecificAction } from '../../../../@types/redux-types';
 import { ModalClass } from '../../../react/design-system/Modal';
 import { loadModalChunk, modalOpen } from '../../action-creators/sync';
+
+const { select, call, put } = effects;
 
 const selectChunk = (state: State): null | ModalClass => state.MODAL.splitChunks.main;
 

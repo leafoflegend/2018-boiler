@@ -9,7 +9,7 @@ const initialState: State = {
       menuItems: [
         {
           title: 'Login',
-          dispatchCb: () => openModal('login'),
+          dispatchCb: dispatch => openModal({ dispatch, type: 'login' }),
         },
       ],
     },

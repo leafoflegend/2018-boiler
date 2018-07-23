@@ -80,7 +80,7 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
                 key={title}
                 onClick={() => {
                   toggleUserMenu({ open: false, node: null });
-                  dispatch(dispatchCb());
+                  dispatch(dispatchCb(dispatch));
                 }}
               >
                 {title}
