@@ -7,49 +7,47 @@ import ProviderAndHistory from './redux';
 import Container from './react';
 
 if (process.env.NODE_ENV === 'production') {
-	const OfflinePluginRuntime = require('offline-plugin/runtime');
+  const OfflinePluginRuntime = require('offline-plugin/runtime');
 
-	OfflinePluginRuntime.install({
-		onUpdateReady: () => {
-			OfflinePluginRuntime.applyUpdate();
-		},
-		onUpdated: () => {
-			if (typeof window !== 'undefined') {
-				window.location.reload();
-			}
-		},
-	});
+  OfflinePluginRuntime.install({
+    onUpdateReady: () => {
+      OfflinePluginRuntime.applyUpdate();
+    },
+    onUpdated: () => {
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
+    },
+  });
 }
 
 const renderRoot = (Component: JSX.Element): void => {
-	if (process.env.NODE_ENV === 'development') {
-		ReactDOM.render(
-			<AppContainer>
-				<ProviderAndHistory>
-					{ Component }
-				</ProviderAndHistory>
-			</AppContainer>,
-			document.getElementById('app'),
-		);
-	}
+  if (process.env.NODE_ENV === 'development') {
+    ReactDOM.render(
+      <AppContainer>
+        <ProviderAndHistory>{Component}</ProviderAndHistory>
+      </AppContainer>,
+      document.getElementById('app'),
+    );
+  }
 
-	if (process.env.NODE_ENV === 'production') {
-		ReactDOM.render(
-				<ProviderAndHistory>
-					{ Component }
-				</ProviderAndHistory>,
-				document.getElementById('app'),
-		);
-	}
+  if (process.env.NODE_ENV === 'production') {
+    ReactDOM.render(
+      <ProviderAndHistory>{Component}</ProviderAndHistory>,
+      document.getElementById('app'),
+    );
+  }
 };
 
 Container().then(renderRoot);
 
 if (module.hot && process.env.NODE_ENV === 'development') {
-	module.hot.accept('./react', () => {
-		const NextContainer: () => Promise<JSX.Element> = require('./react').default;
-		NextContainer()
-			.then(renderRoot)
-			.catch(() => console.warn(`${process.env.APPLICATION_NAME} failed to hot reload react root.`));
-	});
+  module.hot.accept('./react', () => {
+    const NextContainer: () => Promise<JSX.Element> = require('./react').default;
+    NextContainer()
+      .then(renderRoot)
+      .catch(() =>
+        console.warn(`${process.env.APPLICATION_NAME} failed to hot reload react root.`),
+      );
+  });
 }

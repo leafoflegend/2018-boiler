@@ -1,15 +1,15 @@
 import { ActionCreator, Dispatch } from 'redux';
 import { Constants, SpecificAction } from '../../../../@types/redux-types';
 
-const modalOpen: ActionCreator<SpecificAction> = ({
+const openModal: ActionCreator<SpecificAction> = ({
   type,
   dispatch,
 }: {
   type: string;
   dispatch: Dispatch;
 }): SpecificAction => ({
-  type: Constants.MODAL_OPEN,
+  type: Constants.OPEN_CHUNKED_MODAL,
   data: { type, dispatch },
 });
 
-export default modalOpen;
+export default openModal;

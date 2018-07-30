@@ -1,5 +1,3 @@
 import hydrateModal from './hydrateModal';
 
-export {
-	hydrateModal,
-};
+export { hydrateModal };
