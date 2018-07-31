@@ -40,6 +40,9 @@ test:
 serve:
 	NODE_ENV=production node ./configuration/serve
 
+docker-serve:
+	NODE_ENV=production node ./configuration/docker-serve
+
 docker-build:
 	if [ -d "./dockerdist" ]; then \
 		rm -rf ./dockerdist; \
@@ -48,7 +51,7 @@ docker-build:
 		mkdir dockerdist; \
 	fi
 	docker build -t 2018-boiler .
-	docker run -v ./dockerdist:/dockerdist 2018-boiler
+	docker run -v `pwd`/dockerdist:/dockerdist 2018-boiler
 
 docker-build-fe:
 	npx ./node_modules/.bin/tsc

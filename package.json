@@ -13,7 +13,9 @@
     "build:docs": "make build-docs",
     "build:fe": "make build-fe",
     "serve": "make serve",
-    "pre-commit": "make pre-commit"
+    "pre-commit": "make pre-commit",
+    "docker:build": "make docker-build",
+    "docker:serve": "make docker-serve"
   },
   "author": "Eliot Szwajkowski <eliotpszw@gmail.com>",
   "contributors": [
@@ -47,12 +49,20 @@
     "styled-components": "^3.3.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.51",
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/polyfill": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
-    "@babel/preset-react": "^7.0.0-beta.51",
-    "@babel/preset-stage-2": "^7.0.0-beta.51",
+    "@babel/cli": "^7.0.0-beta.55",
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-decorators": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-function-sent": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-json-strings": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0-beta.55",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.55",
+    "@babel/plugin-syntax-import-meta": "^7.0.0-beta.55",
+    "@babel/polyfill": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.55",
+    "@babel/preset-react": "^7.0.0-beta.55",
     "@types/history": "^4.6.2",
     "@types/react": "16.4.1",
     "@types/react-dom": "16.0.6",

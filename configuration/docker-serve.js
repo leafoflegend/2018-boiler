@@ -13,7 +13,7 @@ const rootPath = process.cwd();
 
 const PORT = 6969;
 
-const publicPath = path.join(rootPath, './dist');
+const publicPath = path.join(rootPath, './dockerdist');
 
 app.get('/*', (req, res, next) => {
   if (req.originalUrl) {
