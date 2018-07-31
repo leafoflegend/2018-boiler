@@ -50,3 +50,8 @@ docker-build:
 	docker build -t 2018-boiler .
 	docker run -v ./dockerdist:/dockerdist 2018-boiler
 
+docker-build-fe:
+	npx ./node_modules/.bin/tsc
+	make lint
+	NODE_ENV=production node ./configuration/server
+
