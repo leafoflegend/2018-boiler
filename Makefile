@@ -1,4 +1,4 @@
-.PHONY: start-fe pre-publish test build-docs lint build-fe serve
+.PHONY: start-fe pre-publish test build-docs lint build-fe serve lint
 
 build-docs:
 	npx ./node_modules/.bin/typedoc --options ./typedoc.js
@@ -20,8 +20,8 @@ build-fe:
 pre-publish:
 	git checkout master
 	git pull origin master
+	make lint
 	make test
-	make build-docs
 
 lint:
 	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" "@types/**/*.ts" --write
@@ -39,3 +39,29 @@ test:
 
 serve:
 	NODE_ENV=production node ./configuration/serve
+
+docker-serve:
+	NODE_ENV=production node ./configuration/docker-serve
+
+docker-build:
+	docker -v
+	if [ $? -ne 0 ]; then \
+		echo "Please install Docker to use this command"; \
+		exit 1; \
+	else \
+		echo "Docker installation found"; \
+	fi
+	if [ -d "./dockerdist" ]; then \
+		rm -rf ./dockerdist; \
+	fi
+	if [ ! -d "./dockerdist" ]; then \
+		mkdir dockerdist; \
+	fi
+	docker build -t 2018-boiler .
+	docker run -v `pwd`/dockerdist:/dockerdist 2018-boiler
+
+docker-build-fe:
+	npx ./node_modules/.bin/tsc
+	make lint
+	NODE_ENV=production node ./configuration/server
+

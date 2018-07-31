@@ -15,6 +15,7 @@ const importModal = async (): Promise<{ default: ModalClass }> => {
   }
 };
 
+// TODO: IterableIterator<any> is non ideal. There is a large discussion around this in the typescript community as can be seen here: https://github.com/Microsoft/TypeScript/issues/2983
 export function* openChunkModal({ data }: SpecificAction): IterableIterator<any> {
   let modalChunk: { default: ModalClass };
 
