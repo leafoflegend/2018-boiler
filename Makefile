@@ -44,6 +44,13 @@ docker-serve:
 	NODE_ENV=production node ./configuration/docker-serve
 
 docker-build:
+	docker -v
+	if [ $? -ne 0 ]; then \
+		echo "Please install Docker to use this command"; \
+		exit 1; \
+	else \
+		echo "Docker installation found"; \
+	fi
 	if [ -d "./dockerdist" ]; then \
 		rm -rf ./dockerdist; \
 	fi
