@@ -25,7 +25,11 @@ pre-publish:
 	make test
 
 lint:
-	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" "@types/**/*.ts" --write
+	npx ./node_modules/.bin/prettier --loglevel error 'src/**/*.ts' --write
+	npx ./node_modules/.bin/prettier --loglevel error 'src/**/*.tsx' --write
+	npx ./node_modules/.bin/prettier --loglevel error '@types/**/*.ts' --write
+	npx ./node_modules/.bin/prettier --loglevel error 'js/**/*.js' --write
+	npx ./node_modules/.bin/eslint ./js/**/*.js --fix
 	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.ts
 	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.tsx
 	npx ./node_modules/.bin/eslint ./js

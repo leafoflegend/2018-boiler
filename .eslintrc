@@ -48,6 +48,8 @@
     "react/prefer-stateless-function": 0,
     "jsx-a11y/aria-proptypes": 0,
     "no-useless-escape": 0,
-    "lines-between-class-members": 0
+    "lines-between-class-members": 0,
+    "spaced-comment": 0,
+    "import/newline-after-import": 1
   }
 }

@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
 import { Action, ActionCreator } from 'redux';
 import { ModalClass } from '../../src/react/design-system/Modal';
-import { State, SpecificAction } from '../../@types/redux-types';
 
-export interface State {
+export interface RawState {
   APP_BAR: {
     title: string | undefined;
     userMenu: {
@@ -16,7 +15,7 @@ export interface State {
       open: boolean;
     };
   };
-  DRAWER: object;
+  DRAWER: {};
   MODAL: {
     type: null | string;
     title: string | ReactNode | null;
@@ -37,6 +36,8 @@ export interface State {
     };
   };
 }
+
+export type State = Readonly<RawState>;
 
 export const enum Constants {
   APP_BAR_TOGGLE_MENU = '@@appBar/TOGGLE_MENU',

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { AppBar } from '../../design-system';
+import { AppBar, Drawer } from '../../design-system';
 import { ModalClass } from '../../design-system/Modal';
 import { State } from '../../../../@types/redux-types';
 
@@ -17,6 +17,7 @@ class Home extends Component<Props> {
     return (
       <Fragment>
         <AppBar />
+        <Drawer />
         {Modal ? <Modal /> : null}
       </Fragment>
     );

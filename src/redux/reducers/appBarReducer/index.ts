@@ -10,7 +10,7 @@ const appBarReducer: Reducer = (state: State, { type, data }: SpecificAction): S
           ...state.APP_BAR,
           menu: {
             ...state.APP_BAR.menu,
-            open: data,
+            open: data ? data : !state.APP_BAR.menu.open,
           },
         },
       };
@@ -21,7 +21,7 @@ const appBarReducer: Reducer = (state: State, { type, data }: SpecificAction): S
           ...state.APP_BAR,
           userMenu: {
             ...state.APP_BAR.userMenu,
-            open: data.open,
+            open: data.open ? data.open : !state.APP_BAR.userMenu.open,
             anchorEl: data.node,
           },
         },
