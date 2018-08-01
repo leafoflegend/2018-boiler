@@ -50,6 +50,6 @@
     "no-useless-escape": 0,
     "lines-between-class-members": 0,
     "spaced-comment": 0,
-    "import/newline-after-import": 1
+    "import/newline-after-import": 0
   }
 }
