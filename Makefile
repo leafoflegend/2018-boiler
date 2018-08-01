@@ -26,7 +26,8 @@ pre-publish:
 
 lint:
 	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" "@types/**/*.ts" --write
-	npx ./node_modules/.bin/tslint --project ./tsconfig.json
+	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.ts
+	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.tsx
 	npx ./node_modules/.bin/eslint ./js
 
 pre-commit:
