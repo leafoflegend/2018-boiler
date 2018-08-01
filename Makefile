@@ -1,4 +1,4 @@
-.PHONY: start-fe pre-publish test build-docs lint build-fe serve lint
+.PHONY: start-fe pre-publish test build-docs lint build-fe serve lint docker-serve docker-build docker-build-fe clean-ts
 
 build-docs:
 	npx ./node_modules/.bin/typedoc --options ./typedoc.js
@@ -13,6 +13,7 @@ start-fe:
 
 build-fe:
 	yarn
+	make clean-ts
 	npx ./node_modules/.bin/tsc
 	make lint
 	NODE_ENV=production node ./configuration/server
@@ -42,6 +43,13 @@ serve:
 
 docker-serve:
 	NODE_ENV=production node ./configuration/docker-serve
+
+clean-ts:
+	if [ -d "./js" ]; then \
+		rm -rf ./js; \
+	else \
+		echo "No outputted JS files to clean!"; \
+	fi
 
 docker-build:
 	docker -v
