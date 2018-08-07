@@ -1,6 +1,6 @@
 import { effects } from 'redux-saga';
 import { openChunkModal } from './splitting';
-import { Constants } from '../../../@types/redux-types';
+import { Constants } from '../../@types/redux-types';
 
 const { takeEvery } = effects;
 

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Action, ActionCreator } from 'redux';
-import { ModalClass } from '../../src/react/design-system/Modal';
+import { ModalClass } from '../../react/design-system/Modal';
 
 export interface RawState {
   APP_BAR: {
@@ -15,7 +15,13 @@ export interface RawState {
       open: boolean;
     };
   };
-  DRAWER: {};
+  DRAWER: {
+    navItems: {
+      title: string;
+      icon: string;
+      dispatchCb: ActionCreator<SpecificAction>;
+    }[];
+  };
   MODAL: {
     type: null | string;
     title: string | ReactNode | null;
@@ -46,6 +52,7 @@ export const enum Constants {
   MODAL_CLOSE = '@@modal/CLOSE_MODAL',
   MODAL_LOAD_CHUNK = '@@modal/LOAD_CHUNK',
   OPEN_CHUNKED_MODAL = '@@modal/OPEN_CHUNKED_MODAL',
+  NAV_DRAWER_ACTION = '@@drawer/NAV_ACTION',
 }
 
 export type ConstantDictionary = { [typeName in Constants]: Constants };
@@ -53,3 +60,5 @@ export type ConstantDictionary = { [typeName in Constants]: Constants };
 export interface SpecificAction extends Action<Constants> {
   data?: any;
 }
+
+export type SpecificCreator<Constant extends Constants> = ActionCreator<Action<Constant>>;

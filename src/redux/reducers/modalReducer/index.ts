@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { State, SpecificAction, Constants } from '../../../../@types/redux-types';
+import { State, SpecificAction, Constants } from '../../../@types/redux-types';
 import { hydrateModal } from '../../../utils';
 
 const modalReducer: Reducer = (state: State, { type, data }: SpecificAction): State => {

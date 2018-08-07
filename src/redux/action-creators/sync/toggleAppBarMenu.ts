@@ -1,9 +1,10 @@
-import { ActionCreator } from 'redux';
-import { Constants, SpecificAction } from '../../../../@types/redux-types';
+import { Constants, SpecificCreator } from '../../../@types/redux-types';
 
-const toggleAppBarMenu: ActionCreator<SpecificAction> = (open: boolean): SpecificAction => ({
+const toggleAppBarMenu: SpecificCreator<Constants.APP_BAR_TOGGLE_MENU> = (open: boolean) => ({
   type: Constants.APP_BAR_TOGGLE_MENU,
   data: open,
 });
+
+export type ToggleAppBarMenu = typeof toggleAppBarMenu;
 
 export default toggleAppBarMenu;

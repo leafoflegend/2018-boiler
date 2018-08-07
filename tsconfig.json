@@ -15,19 +15,17 @@
     "strict": true,
     "paths": {
       "*": [
-        "*",
-        "types/*"
+        "*"
       ]
     }
   },
   "compileOnSave": true,
   "include": [
-    "src/**/*",
-    "@types/**/*"
+    "src/**/*"
   ],
   "typeRoots": [
     "node_modules/@types",
-    "@types"
+    "src/@types"
   ],
   "exclude": [
     "js/"

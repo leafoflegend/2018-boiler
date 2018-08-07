@@ -1,5 +1,5 @@
 import { effects } from 'redux-saga';
-import { State, SpecificAction } from '../../../../@types/redux-types';
+import { State, SpecificAction } from '../../../@types/redux-types';
 import { ModalClass } from '../../../react/design-system/Modal';
 import { loadModalChunk, modalOpen } from '../../action-creators/sync';
 

@@ -14,7 +14,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { State } from '../../../../@types/redux-types';
+import { State } from '../../../@types/redux-types';
 import { Dispatch } from 'redux';
 import { toggleAppBarMenu } from '../../../redux/action-creators';
 

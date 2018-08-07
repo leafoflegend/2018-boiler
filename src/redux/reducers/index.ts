@@ -1,4 +1,4 @@
-import { State, SpecificAction } from '../../../@types/redux-types';
+import { State, SpecificAction } from '../../@types/redux-types';
 
 import initialState from './initial-state';
 import appBarReducer from './appBarReducer';
