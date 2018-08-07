@@ -73,9 +73,11 @@ class ApplicationDrawer extends Component<Props & WithStyles<typeof styles>> {
   };
 
   private get navDrawerSelections(): React.ReactFragment[] {
-    return this.props.navItems.map(navItem => (
+    const { navItems, callNavItem } = this.props;
+
+    return navItems.map(navItem => (
       <Fragment key={navItem.title}>
-        <ListItem button onClick={this.props.callNavItem(navItem.dispatchCb)}>
+        <ListItem button onClick={callNavItem(navItem.dispatchCb)}>
           <ListItemIcon>
             <Icon>{navItem.icon}</Icon>
           </ListItemIcon>

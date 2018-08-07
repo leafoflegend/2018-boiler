@@ -1,7 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
+import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { Home, Settings } from '../pages';
+import history from '../../redux/history';
 import { State } from '../../@types/redux-types';
 
 interface StateProps {
@@ -12,20 +14,14 @@ interface StateProps {
 type Props = StateProps;
 
 class RootRouter extends Component<Props> {
-  shouldComponentUpdate(nextProps: Props): boolean {
-    if (this.props.location !== nextProps.location) return true;
-    if (this.props.hash !== nextProps.hash) return true;
-    return false;
-  }
-
   public render() {
     return (
-      <Fragment>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/settings" component={Settings} />
           <Route component={Home} />
         </Switch>
-      </Fragment>
+      </ConnectedRouter>
     );
   }
 }

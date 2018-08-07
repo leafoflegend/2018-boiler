@@ -12,6 +12,7 @@ start-fe:
 	NODE_ENV=development node ./configuration/server
 
 build-fe:
+	rm -rf node_modules
 	yarn
 	make clean-ts
 	npx ./node_modules/.bin/tsc
@@ -28,7 +29,7 @@ lint:
 	npx ./node_modules/.bin/prettier --loglevel error 'src/**/*.ts' --write
 	npx ./node_modules/.bin/prettier --loglevel error 'src/**/*.tsx' --write
 	npx ./node_modules/.bin/prettier --loglevel error 'js/**/*.js' --write
-	npx ./node_modules/.bin/eslint ./js/**/*.js --fix
+	npx ./node_modules/.bin/eslint ./js --fix
 	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.ts
 	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.tsx
 

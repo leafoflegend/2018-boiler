@@ -14,8 +14,11 @@ const rootPath = process.cwd();
 const PORT = 6969;
 
 const publicPath = path.join(rootPath, './dist');
+const indexFile = path.join(publicPath, './index.html');
 
-app.get('/*', (req, res, next) => {
+app.use(expressStaticGzip(publicPath));
+
+app.get('*', (req, res) => {
   if (req.originalUrl) {
     console.log(
       chalk.green('Client Request: '),
@@ -23,10 +26,8 @@ app.get('/*', (req, res, next) => {
     );
   }
 
-  next();
+  res.sendFile(indexFile);
 });
-
-app.use(expressStaticGzip(publicPath));
 
 server.listen(PORT, () => {
   console.log(chalk.green(`${applicationName} has begun serving files on PORT ${PORT}.`));

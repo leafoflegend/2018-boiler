@@ -5,6 +5,7 @@ const path = require('path');
 const notifier = require('node-notifier');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const history = require('connect-history-api-fallback');
 const webpack = require('webpack');
 const configGenerator = require('./config');
 const { applicationName } = require('../boilerconfig');
@@ -28,13 +29,15 @@ if (process.env.NODE_ENV === 'development') {
     stats: { colors: true },
   };
 
+  app.use(history());
   app.use(webpackDevMiddleware(compiler, devOptions));
   app.use(webpackHotMiddleware(compiler));
 
-  const indexPath = path.join(rootPath, './build/index.html.gz');
   const publicPath = path.join(rootPath, './build');
 
-  app.get('/*', (req, res, next) => {
+  app.use(express.static(publicPath));
+
+  app.get('*', (req, res, next) => {
     if (req.originalUrl) {
       console.log(
         chalk.green('Client Request: '),
@@ -44,12 +47,6 @@ if (process.env.NODE_ENV === 'development') {
 
     next();
   });
-
-  app.get('/', (req, res) => {
-    res.status(200).sendFile(indexPath);
-  });
-
-  app.use(express.static(publicPath));
 
   app.use((err, req, res, next) => {
     console.log(chalk.yellow(err, typeof next));

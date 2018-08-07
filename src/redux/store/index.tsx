@@ -1,15 +1,13 @@
 import React, { Component, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, Store, Middleware } from 'redux';
-import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
-
-const history = createBrowserHistory();
+import history from '../history';
 
 let store: Store;
 const sagaMiddleware = createSagaMiddleware();
@@ -17,7 +15,7 @@ const sagaMiddleware = createSagaMiddleware();
 let myMiddleware: Middleware[] = [routerMiddleware(history), sagaMiddleware];
 
 if (process.env.NODE_ENV === 'production') {
-  myMiddleware = [sagaMiddleware];
+  myMiddleware = [sagaMiddleware, createLogger({ collapsed: true })];
 
   store = createStore(connectRouter(history)(rootReducer), applyMiddleware(...myMiddleware));
 } else {
@@ -47,16 +45,12 @@ const finalizedStore = store;
 // @ts-ignore
 window.reduxStore = finalizedStore;
 
-class ProviderAndHistory extends Component<{ children?: ReactNode }> {
+class ProviderClass extends Component<{ children?: ReactNode }> {
   render() {
     const { children } = this.props;
 
-    return (
-      <Provider store={finalizedStore}>
-        <ConnectedRouter history={history}>{children}</ConnectedRouter>
-      </Provider>
-    );
+    return <Provider store={finalizedStore}>{children}</Provider>;
   }
 }
 
-export default ProviderAndHistory;
+export default ProviderClass;

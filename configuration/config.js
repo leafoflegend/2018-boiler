@@ -34,8 +34,8 @@ module.exports = () => {
     application: isDevelopment
       ? [
         'react-hot-loader/patch',
-          'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-          '@babel/polyfill',
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+        '@babel/polyfill',
         './index.tsx',
       ]
       : ['@babel/polyfill', './index.js'],
