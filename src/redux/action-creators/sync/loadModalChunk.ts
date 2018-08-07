@@ -5,4 +5,6 @@ const loadModalChunk: SpecificCreator<Constants.MODAL_LOAD_CHUNK> = (chunk: JSX.
   data: chunk,
 });
 
+export type LoadModalChunk = typeof loadModalChunk;
+
 export default loadModalChunk;

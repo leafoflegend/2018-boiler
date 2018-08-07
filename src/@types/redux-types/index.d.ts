@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import { Action, ActionCreator } from 'redux';
+import { Action, ActionCreator, Dispatch } from 'redux';
 import { ModalClass } from '../../react/design-system/Modal';
+import { NavDrawerAction } from '../../redux/action-creators/sync/navDrawerAction';
 
 export interface RawState {
   APP_BAR: {
@@ -19,7 +20,7 @@ export interface RawState {
     navItems: {
       title: string;
       icon: string;
-      dispatchCb: ActionCreator<SpecificAction>;
+      dispatchCb: (dispatch: Dispatch) => ReturnType<NavDrawerAction>;
     }[];
   };
   MODAL: {
@@ -33,12 +34,12 @@ export interface RawState {
     };
   };
   router?: {
-    action: string;
-    location: {
-      hash: string;
-      pathname: string;
-      search: string;
-      state: any;
+    action?: string;
+    location?: {
+      hash?: string;
+      pathname?: string;
+      search?: string;
+      state?: any;
     };
   };
 }

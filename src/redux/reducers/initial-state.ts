@@ -1,4 +1,5 @@
 import { State } from '../../@types/redux-types';
+import { RoutePaths, NavTypes } from '../../@types/router-types';
 import { openModal, navDrawerAction } from '../action-creators';
 
 const initialState: State = {
@@ -23,12 +24,14 @@ const initialState: State = {
       {
         title: 'Home',
         icon: 'home',
-        dispatchCb: dispatch => navDrawerAction({ dispatch, type: 'route', where: 'home' }),
+        dispatchCb: dispatch =>
+          navDrawerAction({ dispatch, type: NavTypes.ROUTE, where: RoutePaths.HOME }),
       },
       {
         title: 'Settings',
         icon: 'settings',
-        dispatchCb: dispatch => navDrawerAction({ dispatch, type: 'route', where: 'settings' }),
+        dispatchCb: dispatch =>
+          navDrawerAction({ dispatch, type: NavTypes.ROUTE, where: RoutePaths.SETTINGS }),
       },
     ],
   },

@@ -5,4 +5,6 @@ const closeModal: SpecificCreator<Constants.MODAL_CLOSE> = () => ({
   data: null,
 });
 
+export type CloseModal = typeof closeModal;
+
 export default closeModal;

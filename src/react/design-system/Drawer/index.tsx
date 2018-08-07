@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -10,20 +10,26 @@ import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import HomeIcon from '@material-ui/icons/Home';
-import SettingsIcon from '@material-ui/icons/Settings';
+import Icon from '@material-ui/core/Icon';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { State } from '../../../@types/redux-types';
 import { Dispatch } from 'redux';
 import { toggleAppBarMenu } from '../../../redux/action-creators';
+import { NavDrawerAction } from '../../../redux/action-creators/sync/navDrawerAction';
 
 interface StateProps {
   open: boolean;
+  navItems: {
+    title: string;
+    icon: string;
+    dispatchCb: (dispatch: Dispatch) => ReturnType<NavDrawerAction>;
+  }[];
 }
 
 interface DispatchProps {
   drawerToggle: () => void;
+  callNavItem: (navItemCallback: (dispatch: Dispatch) => ReturnType<NavDrawerAction>) => () => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -62,6 +68,24 @@ const styles = (theme: Theme) =>
   });
 
 class ApplicationDrawer extends Component<Props & WithStyles<typeof styles>> {
+  static defaultProps = {
+    navItems: [],
+  };
+
+  private get navDrawerSelections(): React.ReactFragment[] {
+    return this.props.navItems.map(navItem => (
+      <Fragment key={navItem.title}>
+        <ListItem button onClick={this.props.callNavItem(navItem.dispatchCb)}>
+          <ListItemIcon>
+            <Icon>{navItem.icon}</Icon>
+          </ListItemIcon>
+          <ListItemText primary={navItem.title} />
+        </ListItem>
+        <Divider />
+      </Fragment>
+    ));
+  }
+
   public render() {
     const { classes, open, drawerToggle } = this.props;
 
@@ -78,24 +102,7 @@ class ApplicationDrawer extends Component<Props & WithStyles<typeof styles>> {
             {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Settings" />
-          </ListItem>
-        </List>
+        <List>{this.navDrawerSelections}</List>
       </Drawer>
     );
   }
@@ -111,8 +118,10 @@ const mapStateToProps: MapStateToProps = ({
   APP_BAR: {
     menu: { open },
   },
+  DRAWER: { navItems },
 }) => ({
   open,
+  navItems,
 });
 
 type MapDispatchToProps = (dispatch: Dispatch) => DispatchProps;
@@ -121,6 +130,8 @@ const mapDispatchToProps: MapDispatchToProps = dispatch => ({
   drawerToggle: () => {
     dispatch(toggleAppBarMenu());
   },
+  callNavItem: (navItemCallback: (dispatch: Dispatch) => ReturnType<NavDrawerAction>) => () =>
+    dispatch(navItemCallback(dispatch)),
 });
 
 const ConnectedStyledApplicationDrawer = connect<StateProps, DispatchProps, void, State>(

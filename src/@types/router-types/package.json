@@ -1,0 +1,10 @@
+{
+  "name": "@types/router-types",
+  "version": "0.0.1",
+  "description": "TypeScript definitions for Application Routing",
+  "main": "",
+  "scripts": {},
+  "dependencies": {},
+  "typesPublisherContentHash": "9699",
+  "typeScriptVersion": "2.9"
+}
