@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { Action, ActionCreator } from 'redux';
-import { ModalClass } from '../../src/react/design-system/Modal';
-import { State, SpecificAction } from '../../@types/redux-types';
+import { Action, ActionCreator, Dispatch } from 'redux';
+import { ModalClass } from '../../react/design-system/Modal';
+import { NavDrawerAction } from '../../redux/action-creators/sync/navDrawerAction';
 
-export interface State {
+export interface RawState {
   APP_BAR: {
     title: string | undefined;
     userMenu: {
@@ -16,7 +16,13 @@ export interface State {
       open: boolean;
     };
   };
-  DRAWER: object;
+  DRAWER: {
+    navItems: {
+      title: string;
+      icon: string;
+      dispatchCb: (dispatch: Dispatch) => ReturnType<NavDrawerAction>;
+    }[];
+  };
   MODAL: {
     type: null | string;
     title: string | ReactNode | null;
@@ -28,15 +34,17 @@ export interface State {
     };
   };
   router?: {
-    action: string;
-    location: {
-      hash: string;
-      pathname: string;
-      search: string;
-      state: any;
+    action?: string;
+    location?: {
+      hash?: string;
+      pathname?: string;
+      search?: string;
+      state?: any;
     };
   };
 }
+
+export type State = Readonly<RawState>;
 
 export const enum Constants {
   APP_BAR_TOGGLE_MENU = '@@appBar/TOGGLE_MENU',
@@ -45,6 +53,7 @@ export const enum Constants {
   MODAL_CLOSE = '@@modal/CLOSE_MODAL',
   MODAL_LOAD_CHUNK = '@@modal/LOAD_CHUNK',
   OPEN_CHUNKED_MODAL = '@@modal/OPEN_CHUNKED_MODAL',
+  NAV_DRAWER_ACTION = '@@drawer/NAV_ACTION',
 }
 
 export type ConstantDictionary = { [typeName in Constants]: Constants };
@@ -52,3 +61,5 @@ export type ConstantDictionary = { [typeName in Constants]: Constants };
 export interface SpecificAction extends Action<Constants> {
   data?: any;
 }
+
+export type SpecificCreator<Constant extends Constants> = ActionCreator<Action<Constant>>;

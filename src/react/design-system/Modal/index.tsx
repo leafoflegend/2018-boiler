@@ -7,7 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { State } from '../../../../@types/redux-types';
+import { State } from '../../../@types/redux-types';
 import { closeModal } from '../../../redux/action-creators';
 
 const styles = createStyles({});

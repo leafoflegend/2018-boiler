@@ -1,4 +1,4 @@
-.PHONY: start-fe pre-publish test build-docs lint build-fe serve lint
+.PHONY: start-fe pre-publish test build-docs lint build-fe serve lint docker-serve docker-build docker-build-fe clean-ts
 
 build-docs:
 	npx ./node_modules/.bin/typedoc --options ./typedoc.js
@@ -12,7 +12,9 @@ start-fe:
 	NODE_ENV=development node ./configuration/server
 
 build-fe:
+	rm -rf node_modules
 	yarn
+	make clean-ts
 	npx ./node_modules/.bin/tsc
 	make lint
 	NODE_ENV=production node ./configuration/server
@@ -24,9 +26,12 @@ pre-publish:
 	make test
 
 lint:
-	npx ./node_modules/.bin/prettier-eslint "src/**/*.ts" "src/**/*.tsx" "js/**/*.js" "@types/**/*.ts" --write
-	npx ./node_modules/.bin/tslint --project ./tsconfig.json
-	npx ./node_modules/.bin/eslint ./js
+	npx ./node_modules/.bin/prettier --loglevel error 'src/**/*.ts' --write
+	npx ./node_modules/.bin/prettier --loglevel error 'src/**/*.tsx' --write
+	npx ./node_modules/.bin/prettier --loglevel error 'js/**/*.js' --write
+	npx ./node_modules/.bin/eslint ./js --fix
+	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.ts
+	npx ./node_modules/.bin/tslint --project tsconfig.json --config tslint.json -t stylish src/**/*.tsx
 
 pre-commit:
 	npx ./node_modules/.bin/tsc
@@ -42,6 +47,13 @@ serve:
 
 docker-serve:
 	NODE_ENV=production node ./configuration/docker-serve
+
+clean-ts:
+	if [ -d "./js" ]; then \
+		rm -rf ./js; \
+	else \
+		echo "No outputted JS files to clean!"; \
+	fi
 
 docker-build:
 	docker -v

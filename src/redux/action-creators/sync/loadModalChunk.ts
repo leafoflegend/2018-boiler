@@ -1,9 +1,10 @@
-import { ActionCreator } from 'redux';
-import { Constants, SpecificAction } from '../../../../@types/redux-types';
+import { Constants, SpecificCreator } from '../../../@types/redux-types';
 
-const loadModalChunk: ActionCreator<SpecificAction> = (chunk: JSX.Element): SpecificAction => ({
+const loadModalChunk: SpecificCreator<Constants.MODAL_LOAD_CHUNK> = (chunk: JSX.Element) => ({
   type: Constants.MODAL_LOAD_CHUNK,
   data: chunk,
 });
+
+export type LoadModalChunk = typeof loadModalChunk;
 
 export default loadModalChunk;

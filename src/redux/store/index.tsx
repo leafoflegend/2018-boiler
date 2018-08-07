@@ -1,25 +1,41 @@
 import React, { Component, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, Store, Middleware } from 'redux';
-import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { createStore, applyMiddleware, Store, Middleware, compose } from 'redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
+import { createBrowserHistory } from 'history';
+import HistoryProvider from '../history';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
 
 const history = createBrowserHistory();
 
+interface NormalProps {
+  children?: ReactNode;
+}
+
+type Props = NormalProps;
+
+class History extends Component<Props> {
+  public render() {
+    const { children } = this.props;
+
+    return <HistoryProvider.Provider value={history}>{children}</HistoryProvider.Provider>;
+  }
+}
+
 let store: Store;
 const sagaMiddleware = createSagaMiddleware();
 
-let myMiddleware: Middleware[] = [routerMiddleware(history), sagaMiddleware];
+const myMiddleware: Middleware[] = [routerMiddleware(history), sagaMiddleware];
 
 if (process.env.NODE_ENV === 'production') {
-  myMiddleware = [sagaMiddleware];
-
-  store = createStore(connectRouter(history)(rootReducer), applyMiddleware(...myMiddleware));
+  store = createStore(
+    connectRouter(history)(rootReducer),
+    compose(applyMiddleware(...myMiddleware)),
+  );
 } else {
   myMiddleware.push(
     createLogger({
@@ -47,16 +63,16 @@ const finalizedStore = store;
 // @ts-ignore
 window.reduxStore = finalizedStore;
 
-class ProviderAndHistory extends Component<{ children?: ReactNode }> {
+class ProviderClass extends Component<{ children?: ReactNode }> {
   render() {
     const { children } = this.props;
 
     return (
       <Provider store={finalizedStore}>
-        <ConnectedRouter history={history}>{children}</ConnectedRouter>
+        <History>{children}</History>
       </Provider>
     );
   }
 }
 
-export default ProviderAndHistory;
+export default ProviderClass;

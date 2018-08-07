@@ -1,3 +1,4 @@
-import ProviderAndHistory from './store';
+import Provider from './store';
+import history from './history';
 
-export default ProviderAndHistory;
+export { Provider, history };

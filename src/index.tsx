@@ -3,7 +3,7 @@ import 'normalize.css/normalize.css';
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ProviderAndHistory from './redux';
+import { Provider } from './redux';
 import Container from './react';
 
 if (process.env.NODE_ENV === 'production') {
@@ -25,17 +25,14 @@ const renderRoot = (Component: JSX.Element): void => {
   if (process.env.NODE_ENV === 'development') {
     ReactDOM.render(
       <AppContainer>
-        <ProviderAndHistory>{Component}</ProviderAndHistory>
+        <Provider>{Component}</Provider>
       </AppContainer>,
       document.getElementById('app'),
     );
   }
 
   if (process.env.NODE_ENV === 'production') {
-    ReactDOM.render(
-      <ProviderAndHistory>{Component}</ProviderAndHistory>,
-      document.getElementById('app'),
-    );
+    ReactDOM.render(<Provider>{Component}</Provider>, document.getElementById('app'));
   }
 };
 

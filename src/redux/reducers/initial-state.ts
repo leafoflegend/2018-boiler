@@ -1,5 +1,6 @@
-import { State } from '../../../@types/redux-types';
-import { openModal } from '../action-creators';
+import { State } from '../../@types/redux-types';
+import { RoutePaths, NavTypes } from '../../@types/router-types';
+import { openModal, navDrawerAction } from '../action-creators';
 
 const initialState: State = {
   APP_BAR: {
@@ -18,7 +19,22 @@ const initialState: State = {
     },
     title: process.env.APPLICATION_NAME,
   },
-  DRAWER: {},
+  DRAWER: {
+    navItems: [
+      {
+        title: 'Home',
+        icon: 'home',
+        dispatchCb: dispatch =>
+          navDrawerAction({ dispatch, type: NavTypes.ROUTE, where: RoutePaths.HOME }),
+      },
+      {
+        title: 'Settings',
+        icon: 'settings',
+        dispatchCb: dispatch =>
+          navDrawerAction({ dispatch, type: NavTypes.ROUTE, where: RoutePaths.SETTINGS }),
+      },
+    ],
+  },
   MODAL: {
     title: null,
     content: null,

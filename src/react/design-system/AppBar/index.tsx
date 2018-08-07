@@ -10,8 +10,10 @@ import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
+import { Theme } from '@material-ui/core';
+import classNames from 'classnames';
 import { toggleAppBarMenu, toggleAppBarUserMenu } from '../../../redux/action-creators';
-import { State, SpecificAction } from '../../../../@types/redux-types';
+import { State, SpecificAction } from '../../../@types/redux-types';
 
 interface StateProps {
   open: boolean;
@@ -29,26 +31,62 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-const styles = createStyles({
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-});
+const drawerWidth: number = 240;
+
+const styles = (theme: Theme) =>
+  createStyles({
+    title: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginLeft: -12,
+      marginRight: '20px',
+      flexGrow: 0,
+    },
+    userMenuButton: {
+      flexGrow: 0,
+    },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    toolbarFlex: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    hide: {
+      display: 'none',
+    },
+  });
 
 class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
   get UserMenu() {
-    const { toggleUserMenu, userAnchor, userOpen, userMenuItems, dispatch, open } = this.props;
+    const {
+      toggleUserMenu,
+      userAnchor,
+      userOpen,
+      userMenuItems,
+      dispatch,
+      open,
+      classes,
+    } = this.props;
 
     if (userMenuItems && userMenuItems.length) {
       return (
-        <div>
+        <div className={classNames(classes.userMenuButton)}>
           <IconButton
             aria-owns={open ? 'user-menu-appbar' : undefined}
             aria-haspopup="true"
@@ -98,18 +136,21 @@ class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
     const { open, title, toggleMenu, classes } = this.props;
 
     return (
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar
+        position="absolute"
+        className={classNames(classes.appBar, open && classes.appBarShift)}
+      >
+        <Toolbar className={classes.toolbarFlex}>
           <IconButton
             color="inherit"
             onClick={() => {
               toggleMenu(open);
             }}
-            className={classes.menuButton}
+            className={classNames(classes.menuButton, open && classes.hide)}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
+          <Typography variant="title" color="inherit" className={classes.title}>
             {title}
           </Typography>
           {this.UserMenu}

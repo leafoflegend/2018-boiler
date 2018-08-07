@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import ApplicationTheme from './themes';
-import { Home } from './pages';
+import Shell from './shell';
+import Router from './router';
 
 interface Props {
   children?: ReactNode;
@@ -16,7 +17,9 @@ class RootReactContainer extends Component<Props> {
 
 const rootRenderFunction: () => Promise<JSX.Element> = async () => (
   <RootReactContainer>
-    <Home />
+    <Shell>
+      <Router />
+    </Shell>
   </RootReactContainer>
 );
 
