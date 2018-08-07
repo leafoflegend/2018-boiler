@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { Home, Settings } from '../pages';
-import history from '../../redux/history';
+import HistoryProvider from '../../redux/history';
 import { State } from '../../@types/redux-types';
 
 interface StateProps {
@@ -16,12 +16,16 @@ type Props = StateProps;
 class RootRouter extends Component<Props> {
   public render() {
     return (
-      <ConnectedRouter history={history}>
-        <Switch>
-          <Route exact path="/settings" component={Settings} />
-          <Route component={Home} />
-        </Switch>
-      </ConnectedRouter>
+      <HistoryProvider.Consumer>
+        {history => (
+          <ConnectedRouter history={history}>
+            <Switch>
+              <Route exact path="/settings" component={Settings} />
+              <Route component={Home} />
+            </Switch>
+          </ConnectedRouter>
+        )}
+      </HistoryProvider.Consumer>
     );
   }
 }
