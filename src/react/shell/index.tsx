@@ -1,4 +1,5 @@
 import React, { Component, ReactNode } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles, WithStyles, createStyles, Theme } from '@material-ui/core';
 import { AppBar, Drawer } from '../design-system';
@@ -34,6 +35,10 @@ const styles = (theme: Theme) =>
   });
 
 class Shell extends Component<Props & WithStyles<typeof styles>> {
+  static propTypes = {
+    Modal: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([null])]).isRequired,
+  };
+
   public render() {
     const { Modal, children, classes } = this.props;
 

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -6,8 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
-import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
-import { Theme } from '@material-ui/core';
+import { withStyles, WithStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Icon from '@material-ui/core/Icon';
@@ -68,8 +68,17 @@ const styles = (theme: Theme) =>
   });
 
 class ApplicationDrawer extends Component<Props & WithStyles<typeof styles>> {
-  static defaultProps = {
-    navItems: [],
+  static propTypes = {
+    open: PropTypes.bool.isRequired,
+    navItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        icon: PropTypes.string.isRequired,
+        dispatchCb: PropTypes.func.isRequired,
+      }),
+    ).isRequired,
+    drawerToggle: PropTypes.func.isRequired,
+    callNavItem: PropTypes.func.isRequired,
   };
 
   private get navDrawerSelections(): React.ReactFragment[] {

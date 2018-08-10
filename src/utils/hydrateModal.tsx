@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import { Dispatch } from 'redux';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import { Dispatch } from 'redux';
+import { LoginForm } from '../react/containers';
 import Button from '@material-ui/core/Button';
 import { closeModal } from '../redux/action-creators';
 
@@ -22,7 +23,7 @@ const hydrateModal = ({
     case 'login':
       return {
         title: 'Login',
-        content: <DialogContentText>WIP</DialogContentText>,
+        content: <LoginForm />,
         actions: (
           <Button
             onClick={() => {

@@ -45,6 +45,10 @@ const initialState: State = {
       main: null,
     },
   },
+  LOGIN: {
+    username: '',
+    password: '',
+  },
 };
 
 export default initialState;

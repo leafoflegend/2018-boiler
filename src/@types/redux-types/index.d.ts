@@ -33,6 +33,10 @@ export interface RawState {
       main: null | ModalClass;
     };
   };
+  LOGIN: {
+    username: string;
+    password: string;
+  };
   router?: {
     action?: string;
     location?: {
@@ -54,6 +58,8 @@ export const enum Constants {
   MODAL_LOAD_CHUNK = '@@modal/LOAD_CHUNK',
   OPEN_CHUNKED_MODAL = '@@modal/OPEN_CHUNKED_MODAL',
   NAV_DRAWER_ACTION = '@@drawer/NAV_ACTION',
+  UPDATE_USERNAME = '@@login/UPDATE_USERNAME',
+  UPDATE_PASSWORD = '@@login/UPDATE_PASSWORD',
 }
 
 export type ConstantDictionary = { [typeName in Constants]: Constants };

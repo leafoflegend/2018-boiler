@@ -1,4 +1,5 @@
 import React, { Component, ReactNode } from 'react';
+import PropTypes from 'prop-types';
 import { Dispatch } from 'redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -30,6 +31,17 @@ interface MuiProps {
 type Props = StateProps & DispatchProps & MuiProps;
 
 class Modal extends Component<Props & WithStyles<typeof styles>> {
+  static propTypes = {
+    open: PropTypes.bool.isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.oneOf([null])])
+      .isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.oneOf([null])])
+      .isRequired,
+    actions: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.oneOf([null])])
+      .isRequired,
+    modalClose: PropTypes.func.isRequired,
+  };
+
   public render() {
     const { fullScreen, open, modalClose, title, content, actions } = this.props;
 

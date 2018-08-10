@@ -5,6 +5,8 @@ import modalOpen from './modalOpen';
 import closeModal from './closeModal';
 import openModal from './openModal';
 import navDrawerAction from './navDrawerAction';
+import updateUsername from './updateUsername';
+import updatePassword from './updatePassword';
 
 export {
   toggleAppBarMenu,
@@ -14,4 +16,6 @@ export {
   closeModal,
   openModal,
   navDrawerAction,
+  updateUsername,
+  updatePassword,
 };
