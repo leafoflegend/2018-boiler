@@ -8,6 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
+import classNames from 'classnames';
 import { updateUsername, updatePassword } from '../../../redux/action-creators';
 import { State } from '../../../@types/redux-types';
 import { Dispatch } from 'redux';
@@ -24,7 +25,20 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-const styles = () => createStyles({});
+const styles = () =>
+  createStyles({
+    formContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      width: '100%',
+    },
+    formControl: {
+      width: '100%',
+      marginTop: '1em',
+    },
+  });
 
 interface InternalState {
   showPassword: boolean;
@@ -51,36 +65,43 @@ class LoginForm extends Component<Props & WithStyles<typeof styles>, FinalIntern
   };
 
   public render() {
-    const { password, UpdatePassword, username, UpdateUsername } = this.props;
+    const { password, UpdatePassword, username, UpdateUsername, classes } = this.props;
     const { showPassword } = this.state;
 
     return (
       <form>
-        <FormControl>
-          <InputLabel htmlFor="adornment-username">Username/E-Mail</InputLabel>
-          <Input
-            id="adornment-username"
-            type="text"
-            value={username}
-            onChange={event => UpdateUsername(event.target.value)}
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="adornment-password">Password</InputLabel>
-          <Input
-            id="adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={event => UpdatePassword(event.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton aria-label="Toggle password visibility" onClick={this.changeVisibility}>
-                  {showPassword ? <Icon>visibility</Icon> : <Icon>visibility_off</Icon>}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <div className={classNames(classes.formContainer)}>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="adornment-username">Username/E-Mail</InputLabel>
+            <Input
+              id="adornment-username"
+              type="text"
+              value={username}
+              onChange={event => UpdateUsername(event.target.value)}
+              fullWidth
+            />
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="adornment-password">Password</InputLabel>
+            <Input
+              id="adornment-password"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={event => UpdatePassword(event.target.value)}
+              fullWidth
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="Toggle password visibility"
+                    onClick={this.changeVisibility}
+                  >
+                    {showPassword ? <Icon>visibility</Icon> : <Icon>visibility_off</Icon>}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </div>
       </form>
     );
   }
