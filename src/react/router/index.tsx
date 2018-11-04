@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
@@ -14,6 +15,20 @@ interface StateProps {
 type Props = StateProps;
 
 class RootRouter extends Component<Props> {
+  static propTypes = {
+    location: PropTypes.string.isRequired,
+    hash: PropTypes.string.isRequired,
+  };
+
+  componentDidUpdate() {
+    const { location, hash } = this.props;
+
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('New Location: ', location);
+      console.log('New Hash: ', hash);
+    }
+  }
+
   public render() {
     return (
       <HistoryProvider.Consumer>

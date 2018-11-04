@@ -6,6 +6,8 @@ import {
   modalOpen,
   openModal,
   navDrawerAction,
+  updateUsername,
+  updatePassword,
 } from './sync';
 
 export {
@@ -16,4 +18,6 @@ export {
   modalOpen,
   openModal,
   navDrawerAction,
+  updateUsername,
+  updatePassword,
 };

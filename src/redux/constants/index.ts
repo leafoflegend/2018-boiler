@@ -8,6 +8,8 @@ const reduxConstants: ConstantDictionary = {
   '@@modal/LOAD_CHUNK': Constants.MODAL_LOAD_CHUNK,
   '@@modal/OPEN_CHUNKED_MODAL': Constants.OPEN_CHUNKED_MODAL,
   '@@drawer/NAV_ACTION': Constants.NAV_DRAWER_ACTION,
+  '@@login/UPDATE_USERNAME': Constants.UPDATE_USERNAME,
+  '@@login/UPDATE_PASSWORD': Constants.UPDATE_PASSWORD,
 };
 
 export default reduxConstants;

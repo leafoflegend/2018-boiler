@@ -16,6 +16,7 @@
       true,
       "always"
     ],
-    "ter-arrow-parens": [true, "as-needed"]
+    "ter-arrow-parens": [true, "as-needed"],
+    "semicolon": false
   }
 }

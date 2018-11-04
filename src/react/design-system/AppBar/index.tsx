@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Dispatch, ActionCreator } from 'redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -73,6 +74,22 @@ const styles = (theme: Theme) =>
   });
 
 class ApplicationBar extends Component<Props & WithStyles<typeof styles>> {
+  static propTypes = {
+    open: PropTypes.bool.isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined])]).isRequired,
+    userAnchor: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([undefined])]).isRequired,
+    userOpen: PropTypes.bool.isRequired,
+    userMenuItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        dispatchCb: PropTypes.func.isRequired,
+      }),
+    ).isRequired,
+    toggleMenu: PropTypes.func.isRequired,
+    toggleUserMenu: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
   get UserMenu() {
     const {
       toggleUserMenu,

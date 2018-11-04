@@ -51,6 +51,7 @@
     "lines-between-class-members": 0,
     "spaced-comment": 0,
     "import/newline-after-import": 0,
-    "react/no-multi-comp": 0
+    "react/no-multi-comp": 0,
+    "prefer-rest-params": 1
   }
 }
