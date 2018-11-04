@@ -7,11 +7,11 @@ const applicationThemeType = 'dark';
 const applicationThemeFonts = ['Open Sans', 'Roboto'].join(', ');
 
 module.exports = {
-	applicationName ,
-	applicationDescription,
-	applicationBackgroundColor,
-	applicationThemeColor,
-	applicationThemeSecondaryColor,
-	applicationThemeType,
-	applicationThemeFonts,
+  applicationName,
+  applicationDescription,
+  applicationBackgroundColor,
+  applicationThemeColor,
+  applicationThemeSecondaryColor,
+  applicationThemeType,
+  applicationThemeFonts,
 };
