@@ -2,7 +2,7 @@
 Eliot Szwajkowskis boiler plate with some of the hottest foundational technologies of the front end development world in 2018.
 
 ## Introduction
-This repository is home to most of whats needed to begin building an top-notch professional web application. These include:
+This repository is home to most of whats needed to begin building a top-notch professional web application. These include:
 
  - [`@material-ui`](https://material-ui.com/)
  - [`React`](https://reactjs.org/) _(obviously)_
